@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./src/server.ts",
-    "production": "NODE_ENV=production pm2 start ./src/server.ts",
-    "test": "pm2 start ./src/server.ts",
+    "production": "NODE_ENV=production tsx ./src/server.ts",
     "build": "npx tsc"
   },
   "author": "",
