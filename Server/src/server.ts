@@ -20,7 +20,7 @@ InitiateMongoServer();
 const app: Express = express();
 const port = PORT || 5000;
 
-app.options("*", cors());
+// app.options("*", cors());
 app.use(
   cors({
     origin: [
@@ -28,9 +28,8 @@ app.use(
       PUBLISHER_URL || "http://localhost:5173",
       AUDIENCE_URL || "http://localhost:5173",
     ],
-    allowedHeaders: ["Authorization"],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    preflightContinue: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
