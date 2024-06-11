@@ -28,6 +28,8 @@ app.use(
       PUBLISHER_URL || "http://localhost:5173",
       AUDIENCE_URL || "http://localhost:5173",
     ],
+    allowedHeaders: ["Authorization"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     preflightContinue: true,
   })
 );
