@@ -20,6 +20,7 @@ InitiateMongoServer();
 const app: Express = express();
 const port = PORT || 5000;
 
+app.options("*", cors());
 app.use(
   cors({
     origin: [
