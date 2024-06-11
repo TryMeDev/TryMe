@@ -28,6 +28,7 @@ app.use(
       PUBLISHER_URL || "http://localhost:5173",
       AUDIENCE_URL || "http://localhost:5173",
     ],
+    preflightContinue: true,
   })
 );
 
