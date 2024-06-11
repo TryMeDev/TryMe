@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://trymeserver.onrender.com/",
+    baseUrl: "https://trymeserver-a52o.onrender.com/",
     prepareHeaders: (headers, { endpoint }) => {
       if (!headers.get("Authorization")) {
         const token = localStorage.getItem("token");
