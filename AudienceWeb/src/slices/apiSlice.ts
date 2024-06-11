@@ -4,6 +4,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://trymeserver.onrender.com/",
     mode: "cors",
+    credentials: "same-origin",
   }),
   reducerPath: "api",
   endpoints: (builder) => ({}),
