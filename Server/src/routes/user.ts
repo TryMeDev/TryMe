@@ -23,7 +23,7 @@ async function verifyGoogleToken(token: string) {
 // publisher register/login;
 router.post("/login", async (req: Request, res: Response) => {
   try {
-    const { clientId, credential } = req.body.credentials;
+    const { clientId, credential } = req?.body?.credentials;
     if (credential) {
       const verificationResponse = await verifyGoogleToken(credential);
 
@@ -34,7 +34,7 @@ router.post("/login", async (req: Request, res: Response) => {
       }
 
       const email = verificationResponse?.payload?.email;
-      let user = await User.findOne({ email: email });
+      let user = await User.findOne({ email: email }).lean();
 
       if (!user) {
         user = await User.create({ email });

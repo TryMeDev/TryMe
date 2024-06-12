@@ -9,7 +9,7 @@ export type display = { en: string; "zh-TW": string };
 // audience/publisher/admin get cats
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const result = await Cat.find({});
+    const result = await Cat.find({}).lean();
     return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json(error);
@@ -20,7 +20,7 @@ router.get("/", async (req: Request, res: Response) => {
 router.post("/", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
     if (!user || !user.isAdmin) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
@@ -43,7 +43,7 @@ router.post("/", auth, async (req: Request, res: Response) => {
 router.put("/", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
     if (!user || !user.isAdmin) {
       return res.status(401).json({ msg: "Unauthorized" });
     }

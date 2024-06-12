@@ -10,7 +10,7 @@ import { rateLimit } from "express-rate-limit";
 
 const limiter = rateLimit({
   windowMs: 1000,
-  limit: 10,
+  limit: 6,
   standardHeaders: "draft-7",
   legacyHeaders: false,
 });
@@ -34,7 +34,7 @@ app.use(limiter);
 
 app.use("/stripe", stripeRouter);
 
-app.use(express.json());
+app.use(express.json({ limit: "11mb" }));
 
 app.use("/ad", adRouter);
 app.use("/cat", catRouter);

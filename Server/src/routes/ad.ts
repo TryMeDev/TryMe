@@ -120,8 +120,8 @@ router.post("/browse", async (req: Request, res: Response) => {
 // audience / admin autocomplete tags
 router.get("/tags", async (req: Request, res: Response) => {
   try {
-    const tags = await Tag.find({}, { name: 1 });
-    return res.status(200).json(tags.map((t) => t.name));
+    const tags = await Tag.find({}, { _id: 0, name: 1 }).lean();
+    return res.status(200).json(tags);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -131,7 +131,7 @@ router.get("/tags", async (req: Request, res: Response) => {
 router.get("/profile", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
     if (!user) {
       return res.status(400).json({ msg: "Bad Request" });
     }
@@ -152,7 +152,7 @@ router.get("/profile", auth, async (req: Request, res: Response) => {
         is18: 1,
         explosure: 1,
       }
-    );
+    ).lean();
 
     return res.status(200).json(convertAds(ads));
   } catch (error) {
@@ -164,7 +164,7 @@ router.get("/profile", auth, async (req: Request, res: Response) => {
 router.post("/adminsearch", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
     if (!user || !user.isAdmin) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
@@ -194,10 +194,10 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
     }
 
     if (search && typeof search === "string") {
-      query.$or = [{ $text: { $search: search } }];
+      query.$or.push({ $text: { $search: search } });
     }
 
-    const ad = await Ad.findOne(query);
+    const ad = await Ad.findOne(query).lean();
     if (ad) {
       return res.status(200).json(convertAd(ad));
     } else {
@@ -276,7 +276,7 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
 router.put("/pay", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
 
     if (!user) {
       return res.status(400).json({ msg: "Bad Request" });
@@ -307,7 +307,7 @@ router.put("/pay", auth, async (req: Request, res: Response) => {
 router.put("/", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
 
     if (!user || !user.isAdmin) {
       return res.status(401).json({ msg: "Unauthorized" });
@@ -346,18 +346,22 @@ router.put("/", auth, async (req: Request, res: Response) => {
       ad.status = status;
       ad.statusDescription = statusDescription;
       ad.is18 = is18;
-      await ad.save();
-
-      for (const tag of tags) {
-        await Tag.findOneAndUpdate(
-          { name: tag },
-          { name: tag },
-          { upsert: true }
-        );
-      }
+      await Promise.all([
+        ad.save(),
+        ...tags?.map(
+          (tag) =>
+            Tag.findOneAndUpdate(
+              { name: tag },
+              { name: tag },
+              { upsert: true }
+            ) || []
+        ),
+      ]);
 
       return res.status(200).json({ _id: ad._id });
     }
+
+    return res.status(404).json({ msg: "Not Found" });
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -367,7 +371,7 @@ router.put("/", auth, async (req: Request, res: Response) => {
 router.put("/cancel", auth, async (req: Request, res: Response) => {
   try {
     const email = res.locals.email;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).lean();
 
     const {
       adId,

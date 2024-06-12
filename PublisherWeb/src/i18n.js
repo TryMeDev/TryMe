@@ -31,6 +31,7 @@ i18n
             failedSummary: "Login Fails",
             failedDetail: "Please check if the email address is valid",
             logout: "Logout",
+            hint: "Some Google Chrome plugins may interfere the login process. Please try to disable them if you can't login.",
           },
           home: {
             yourAds: "Your Advertisements",
@@ -114,6 +115,7 @@ i18n
             failedSummary: "登入失敗",
             failedDetail: "請檢查電子郵件地址是否有效",
             logout: "登出",
+            hint: "Google Chrome的某些擴充功能會導致無法登錄，如你無法登錄請嘗試停用它們",
           },
           home: {
             yourAds: "您的廣告",

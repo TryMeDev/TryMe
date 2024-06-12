@@ -34,7 +34,7 @@ const Login = () => {
     <>
       <LoadingScreen isLoading={isLoading} />
       <div className="w-full h-full flex flex-col">
-        <AppBar />
+        <AppBar canLogout={false} />
         <Toast ref={toast} />
         <div className="flex flex-col flex-grow justify-center items-center p-4">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ""}>
@@ -51,6 +51,7 @@ const Login = () => {
               }}
             />
           </GoogleOAuthProvider>
+          <div>{t("login.hint")}</div>
         </div>
       </div>
     </>
