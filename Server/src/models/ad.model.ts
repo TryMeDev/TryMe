@@ -63,9 +63,13 @@ adSchema.index({
   startDate: 1,
   endDate: 1,
   tags: 1,
-  catIds: 1,
-  locations: 1,
   status: 1,
+});
+adSchema.index({
+  catIds: 1,
+});
+adSchema.index({
+  locations: 1,
 });
 const Ad = model("Ad", adSchema);
 

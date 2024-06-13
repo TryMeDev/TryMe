@@ -99,6 +99,7 @@ i18n
               aspectratio:
                 "Please select image of size 1080*1920 (portrait), or the resulting image will be distorted",
             },
+            payError: "Payment fail. Please try later.",
           },
           status: {
             unpaid: "Unpaid",
@@ -181,6 +182,7 @@ i18n
               next: "下一步",
               aspectratio: "請上載1080*1920竪屏的照片，否則有可能會變形",
             },
+            payError: "付款失敗，請稍後再嘗試",
           },
           status: {
             unpaid: "未付款",

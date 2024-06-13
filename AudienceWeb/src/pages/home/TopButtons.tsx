@@ -1,8 +1,11 @@
 import { ad } from "../../slices/adsSlice";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { IndexedDBContext } from "../../app/IndexedDBContext";
+import { LOCAL_URL } from "../../config";
+import { Toast } from "primereact/toast";
+import { t } from "i18next";
 
 const TopButtons: React.FC<{
   currentAd?: ad;
@@ -10,6 +13,7 @@ const TopButtons: React.FC<{
   isSearch: boolean;
 }> = ({ currentAd, currentAdId, isSearch }) => {
   const navigate = useNavigate();
+  const toast = useRef<Toast>(null);
 
   const indexedDBContext = useContext(IndexedDBContext);
 
@@ -26,6 +30,7 @@ const TopButtons: React.FC<{
 
   return (
     <div className="w-full flex justify-between p-1 absolute">
+      <Toast ref={toast} />
       {isSearch ? (
         <Button
           icon="pi pi-chevron-left"
@@ -59,6 +64,22 @@ const TopButtons: React.FC<{
         </div>
       )}
       <div>
+        {currentAd && currentAdId && (
+          <Button
+            icon="pi pi-clipboard"
+            className="bg-opacity-10 bg-black"
+            text
+            rounded
+            onClick={() => {
+              navigator.clipboard.writeText(`${LOCAL_URL}${currentAdId}`);
+              toast.current?.show({
+                severity: "success",
+                summary: t("success"),
+                detail: t("copiedToClipboard"),
+              });
+            }}
+          />
+        )}
         {currentAd &&
           currentAdId &&
           (bookmarkIds?.includes(currentAdId) ? (

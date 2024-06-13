@@ -65,6 +65,8 @@ i18n
             "An error has occurred. Please ensure you are connected to the network and try reloading. If the issue persists, please try again later.",
           language: "Language",
           location: "Location",
+          copiedToClipboard: "Copied to clipboard",
+          success: "Success",
         },
       },
       "zh-TW": {
@@ -86,7 +88,7 @@ i18n
             settings: "設定",
             is18: "我已年滿18歲",
             isNot18: "我未年滿18歲",
-            interestedCats: "請剔除你不感興趣的類別",
+            interestedCats: "請取消勾選你不感興趣的類別",
           },
           search: {
             getTagsError:
@@ -105,6 +107,8 @@ i18n
             "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",
           language: "語言",
           location: "地區",
+          copiedToClipboard: "已複製到剪貼版",
+          success: "成功",
         },
       },
     },

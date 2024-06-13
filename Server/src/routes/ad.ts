@@ -16,7 +16,7 @@ const router = express.Router();
 
 function convertAd(ad: any) {
   return {
-    ...ad.toObject(),
+    ...(ad.toObject !== undefined ? ad.toObject() : ad),
     imgs: ad.imgs.map(
       (img: Buffer) => "data:image;base64," + img.toString("base64")
     ),
@@ -171,7 +171,7 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
 
     const { search, earlierThan, locations, statuses } = req.body;
 
-    const query: any = {};
+    const query: any = { $or: [] };
     if (isValidObjectId(search)) {
       const ad = await Ad.findById(search);
       if (ad) {
@@ -234,7 +234,7 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
     const userAds = await Ad.find({
       _id: { $in: user.adIds },
       status: { $in: ["unpaid", "paid", "approved"] },
-    });
+    }).lean();
 
     if (
       isTimeConflict(

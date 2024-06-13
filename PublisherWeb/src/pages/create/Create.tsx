@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import useProfile from "../../hooks/useProfile";
 import LoadingScreen from "../../components/LoadingScreen";
 import AppBar from "../../components/AppBar";
@@ -9,6 +9,7 @@ import SetInfo from "./SetInfo";
 import { addDays } from "../../assets/utils";
 import { useCreateAdMutation } from "../../slices/adsSlice";
 import { useTranslation } from "react-i18next";
+import { Toast } from "primereact/toast";
 
 export type division = {
   label: string;
@@ -38,8 +39,15 @@ const Create: React.FC = () => {
   const [startDate, setStartDate] = useState<Date>(addDays(3));
   const [endDate, setEndDate] = useState<Date>(addDays(8));
 
+  const toast = useRef<Toast>(null);
+
   useEffect(() => {
     if (isError) {
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: t("create.payError"),
+      });
     }
   }, [isError]);
 
@@ -47,6 +55,7 @@ const Create: React.FC = () => {
     <div className="w-full h-full flex flex-col overflow-auto">
       <AppBar />
       <LoadingScreen isLoading={!isSuccess || isLoading} />
+      <Toast ref={toast} />
 
       <div className="flex flex-col flex-grow p-4 gap-4">
         <Steps model={steps} activeIndex={activeIndex} />
