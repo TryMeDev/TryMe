@@ -27,7 +27,7 @@ const NotFound: React.FC<{ reGetById: () => void }> = ({ reGetById }) => {
       </div>
 
       <div className="flex flex-grow justify-center items-center p-2">
-        <h3 className="text-center">{t("shared.notFound")}</h3>
+        <h3 className="text-center">{t("share.notFound")}</h3>
         <Button icon="pi pi-refresh" text onClick={reGetById} />
       </div>
     </div>

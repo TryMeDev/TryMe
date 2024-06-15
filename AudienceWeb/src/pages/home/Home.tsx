@@ -54,7 +54,7 @@ const Home: React.FC = () => {
       }}
       errorText={t("home.getIdsError")}
     />
-  ) : adIds?.length === 0 ? (
+  ) : !isGetIdsLoading && adIds?.length === 0 ? (
     <NotFound isSearch={isSearch} />
   ) : (
     <>

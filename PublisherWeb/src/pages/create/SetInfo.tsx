@@ -150,17 +150,11 @@ const SetInfo: React.FC<{
       />
 
       <div>
-        <div>{`${t("create.setInfo.price")}: ${charge?.toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        })}`}</div>
+        <div>{`${t("create.setInfo.price")}: USD $${charge}`}</div>
         {charge < MINIMUM_CHARGE && (
           <div className="text-red-500">
             {t("create.setInfo.minimumCharge", {
-              charge: MINIMUM_CHARGE?.toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
-              }),
+              charge: `USD $${MINIMUM_CHARGE}`,
             })}
           </div>
         )}

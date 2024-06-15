@@ -1,8 +1,5 @@
 import React from "react";
-import LoadingScreen from "../../components/LoadingScreen";
-import { useTranslation } from "react-i18next";
 import { ad } from "../../slices/adsSlice";
-import Error from "../../components/Error";
 import { Image } from "primereact/image";
 import Slider from "react-slick";
 

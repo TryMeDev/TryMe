@@ -1,11 +1,9 @@
 import { ad } from "../../slices/adsSlice";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { IndexedDBContext } from "../../app/IndexedDBContext";
-import { LOCAL_URL } from "../../config";
 import { Toast } from "primereact/toast";
-import { t } from "i18next";
 
 const TopButtons: React.FC<{
   currentAd?: ad;

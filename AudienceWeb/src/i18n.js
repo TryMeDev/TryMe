@@ -27,6 +27,7 @@ i18n
     resources: {
       en: {
         translation: {
+          share: { notFound: "Sorry, the advertisement may be removed" },
           error: {
             title: "Oops",
             message: "An unexpected error has occurred.",
@@ -71,6 +72,7 @@ i18n
       },
       "zh-TW": {
         translation: {
+          share: { notFound: "非常抱歉，連結的廣告可能已被移除" },
           error: {
             title: "糟糕",
             message: "發生了意外錯誤。",
