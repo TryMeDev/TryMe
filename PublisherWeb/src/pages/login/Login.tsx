@@ -3,10 +3,10 @@ import { useLoginMutation } from "../../slices/authSlice";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { Toast } from "primereact/toast";
 import LoadingScreen from "../../components/LoadingScreen";
-import AppBar from "../../components/AppBar";
 import { GOOGLE_CLIENT_ID } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import AppBar from "../../components/AppBar";
 
 const Login = () => {
   const [login, { isLoading, isError, isSuccess }] = useLoginMutation();
@@ -31,12 +31,14 @@ const Login = () => {
   }, [isSuccess]);
 
   return (
-    <>
+    <div className="w-full h-full flex flex-col">
       <LoadingScreen isLoading={isLoading} />
-      <div className="w-full h-full flex flex-col">
-        <AppBar canLogout={false} />
+      <AppBar canLogout={false} />
+      <div className="flex-1 flex flex-col justify-center p-4">
         <Toast ref={toast} />
-        <div className="flex flex-col flex-grow justify-center items-center p-4">
+        <h1 className="text-6xl text-[#80f]">只要有才華</h1>
+        <h2 className="text-4xl text-yellow-300">就能有曝光</h2>
+        <div className="mt-4">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ""}>
             <GoogleLogin
               onSuccess={(credentials) => {
@@ -51,10 +53,10 @@ const Login = () => {
               }}
             />
           </GoogleOAuthProvider>
-          <div>{t("login.hint")}</div>
+          <div className="text-gray-300">{t("login.hint")}</div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

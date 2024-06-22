@@ -42,7 +42,7 @@ export const uploadImages = async (
       const resizedImages = await Promise.all(
         (req.files as Express.Multer.File[]).map(async (file) => {
           const buffer = await sharp(file.buffer)
-            .resize(1080, 1920, { fit: "inside" })
+            .resize(1080, 1920, { fit: "cover" })
             .jpeg({ quality: 80 })
             .toBuffer();
           return {

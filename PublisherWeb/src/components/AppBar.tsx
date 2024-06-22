@@ -26,10 +26,24 @@ const AppBar: React.FC<{ children?: React.ReactNode; canLogout?: boolean }> = ({
           navigate("/");
         }}
       />
+      <Button
+        className="py-0 px-1"
+        label={t("aboutUs.aboutUs")}
+        onClick={() => {
+          navigate("/aboutus");
+        }}
+      />
+      <Button
+        className="py-0 px-1"
+        label={t("faq.faq")}
+        onClick={() => {
+          navigate("/faq");
+        }}
+      />
       <div className="flex-1">{children}</div>
       {canLogout && (
         <Button
-          className="p-0"
+          className="py-0 px-1"
           label={t("login.logout")}
           onClick={() => {
             localStorage.removeItem("token");

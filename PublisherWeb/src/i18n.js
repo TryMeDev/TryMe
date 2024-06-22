@@ -84,6 +84,7 @@ i18n
               timeConflict:
                 "The time selected is conflicted with another advertisements, please change it",
               payment: "Payment",
+              readInstructions: "I have read and agreed the user instructions",
             },
             setLinks: {
               title: "Please set the links",
@@ -108,6 +109,13 @@ i18n
             rejected: "Rejected",
             canceled: "Canceled",
           },
+          aboutUs: {
+            aboutUs: "About Us",
+          },
+          instructions: {
+            instructions: "instructions",
+          },
+          faq: { faq: "FAQ" },
         },
       },
       "zh-TW": {
@@ -168,6 +176,7 @@ i18n
               timeConflict:
                 "你選擇的時間與你選擇的其他廣告重疊了,請選擇其他時間",
               payment: "付款",
+              readInstructions: "我已閲讀並同意用戶須知",
             },
             setLinks: {
               title: "請設定連結",
@@ -191,6 +200,13 @@ i18n
             rejected: "已被拒絕",
             canceled: "已取消",
           },
+          aboutUs: {
+            aboutUs: "關於我們",
+          },
+          instructions: {
+            instructions: "用戶須知",
+          },
+          faq: { faq: "FAQ" },
         },
       },
     },

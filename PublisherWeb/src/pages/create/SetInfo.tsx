@@ -11,6 +11,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { division } from "./Create";
 import useProfile from "../../hooks/useProfile";
+import { Checkbox } from "primereact/checkbox";
+import { Link } from "react-router-dom";
 
 const MINIMUM_CHARGE = 5;
 
@@ -52,6 +54,8 @@ const SetInfo: React.FC<{
   const { profile, isSuccess } = useProfile();
   const { t } = useTranslation();
 
+  const [isInstructionsAccepted, setIsInstructionsAccepted] =
+    useState<boolean>(false);
   const [filteredDivisions, setFilteredDivisions] =
     useState<region[]>(regionDataList);
 
@@ -158,6 +162,18 @@ const SetInfo: React.FC<{
             })}
           </div>
         )}
+        <Checkbox
+          checked={isInstructionsAccepted}
+          onChange={(e) => {
+            if (e.checked !== undefined) {
+              setIsInstructionsAccepted(e.checked);
+            }
+          }}
+        />
+        <label> </label>
+        <Link to="/instructions" className="underline">
+          {t("create.setInfo.readInstructions")}
+        </Link>
       </div>
 
       <div className="w-full flex justify-between mt-2">
@@ -170,7 +186,11 @@ const SetInfo: React.FC<{
         <Button
           label={t("create.setInfo.payment")}
           disabled={
-            !startDate || !endDate || charge < MINIMUM_CHARGE || isConflict
+            !startDate ||
+            !endDate ||
+            charge < MINIMUM_CHARGE ||
+            isConflict ||
+            !isInstructionsAccepted
           }
           onClick={() => {
             if (startDate && endDate) {
