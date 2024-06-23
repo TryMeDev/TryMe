@@ -171,21 +171,11 @@ const SetInfo: React.FC<{
           }}
         />
         <label>{t("create.setInfo.read")}</label>
-        <Link
-          to="/instructions"
-          className="underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to="/instructions" className="underline" target="_blank">
           {t("create.setInfo.instructions")}
         </Link>
         <label>{t("create.setInfo.and")}</label>
-        <Link
-          to="/instructions"
-          className="underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to="/faq" className="underline" target="_blank">
           {t("create.setInfo.faq")}
         </Link>
       </div>
