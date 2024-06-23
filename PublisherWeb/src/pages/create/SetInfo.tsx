@@ -12,7 +12,9 @@ import { useTranslation } from "react-i18next";
 import { division } from "./Create";
 import useProfile from "../../hooks/useProfile";
 import { Checkbox } from "primereact/checkbox";
-import { Link } from "react-router-dom";
+import { Dialog } from "primereact/dialog";
+import Instructions from "../instructions/Instructions";
+import FAQ from "../faq/FAQ";
 
 const MINIMUM_CHARGE = 5;
 
@@ -53,6 +55,9 @@ const SetInfo: React.FC<{
 }) => {
   const { profile, isSuccess } = useProfile();
   const { t } = useTranslation();
+  const [isFAQVisible, setIsFAQVisible] = useState<boolean>(false);
+  const [isInstructionsVisible, setIsInstructionsVisible] =
+    useState<boolean>(false);
 
   const [isInstructionsAccepted, setIsInstructionsAccepted] =
     useState<boolean>(false);
@@ -171,13 +176,23 @@ const SetInfo: React.FC<{
           }}
         />
         <label>{t("create.setInfo.read")}</label>
-        <Link to="/instructions" className="underline" target="_blank">
+        <label
+          className="underline cursor-pointer"
+          onClick={() => {
+            setIsInstructionsVisible(true);
+          }}
+        >
           {t("create.setInfo.instructions")}
-        </Link>
+        </label>
         <label>{t("create.setInfo.and")}</label>
-        <Link to="/faq" className="underline" target="_blank">
+        <label
+          className="underline cursor-pointer"
+          onClick={() => {
+            setIsFAQVisible(true);
+          }}
+        >
           {t("create.setInfo.faq")}
-        </Link>
+        </label>
       </div>
 
       <div className="w-full flex justify-between mt-2">
@@ -203,6 +218,27 @@ const SetInfo: React.FC<{
           }}
         />
       </div>
+
+      <Dialog
+        header={t("instructions.heading")}
+        visible={isInstructionsVisible}
+        onHide={() => {
+          if (!isInstructionsVisible) return;
+          setIsInstructionsVisible(false);
+        }}
+      >
+        <Instructions />
+      </Dialog>
+      <Dialog
+        header={t("faq.faq")}
+        visible={isFAQVisible}
+        onHide={() => {
+          if (!isFAQVisible) return;
+          setIsFAQVisible(false);
+        }}
+      >
+        <FAQ />
+      </Dialog>
     </>
   );
 };
