@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useProfile from "../../hooks/useProfile";
 import LoadingScreen from "../../components/LoadingScreen";
 import AppBar from "../../components/AppBar";
@@ -42,11 +42,18 @@ const Detail: React.FC = () => {
   } = useGetCatsQuery({});
 
   const [imgN, setImgN] = useState<number>(0);
-  const [deleteAd, { isError: isDeleteAdError, error: deleteAdError }] =
-    useDeleteAdMutation();
+  const [
+    deleteAd,
+    {
+      isError: isDeleteAdError,
+      error: deleteAdError,
+      isSuccess: isDeleteAdSucess,
+    },
+  ] = useDeleteAdMutation();
   const [cancelAd, { isError: isCancelAdError, error: cancelAdError }] =
     useCancelAdMutation();
   const [payAd, { isError: isPayError, error: payError }] = usePayAdMutation();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const ad =
@@ -105,6 +112,12 @@ const Detail: React.FC = () => {
       });
     }
   }, [isPayError]);
+
+  useEffect(() => {
+    if (isDeleteAdSucess) {
+      navigate("/");
+    }
+  }, [isDeleteAdSucess]);
 
   return (
     <>
