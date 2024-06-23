@@ -119,6 +119,7 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
           <a
             href={link}
             target="_blank"
+            rel="noopener noreferrer"
             className="text-lg overflow-clip w-full"
             key={idx}
           >

@@ -208,10 +208,18 @@ const Settings: React.FC = () => {
             </div>
 
             <div className="mt-3 flex flex-col">
-              <a href={`${PUBLISHER_URL}aboutus`} target="_blank">
+              <a
+                href={`${PUBLISHER_URL}aboutus`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {t("settings.aboutUs")}
               </a>
-              <a href={`${PUBLISHER_URL}faq`} target="_blank">
+              <a
+                href={`${PUBLISHER_URL}faq`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {t("settings.faq")}
               </a>
             </div>

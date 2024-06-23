@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-app.set("trust proxy", 10);
+app.set("trust proxy", "loopback, linklocal, uniquelocal");
 app.use(limiter);
 
 app.use("/stripe", stripeRouter);

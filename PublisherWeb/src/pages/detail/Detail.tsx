@@ -142,6 +142,7 @@ const Detail: React.FC = () => {
                     className="text-lg overflow-clip w-full"
                     key={idx}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {link && `${t("detail.link")}${idx + 1}: ${link}`}
                   </a>
