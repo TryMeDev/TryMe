@@ -208,8 +208,12 @@ const Settings: React.FC = () => {
             </div>
 
             <div className="mt-3 flex flex-col">
-              <a href={`${PUBLISHER_URL}aboutus`}>{t("settings.aboutUs")}</a>
-              <a href={`${PUBLISHER_URL}faq`}>{t("settings.faq")}</a>
+              <a href={`${PUBLISHER_URL}aboutus`} target="_blank">
+                {t("settings.aboutUs")}
+              </a>
+              <a href={`${PUBLISHER_URL}faq`} target="_blank">
+                {t("settings.faq")}
+              </a>
             </div>
           </div>
         </>

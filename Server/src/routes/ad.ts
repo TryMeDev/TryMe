@@ -48,7 +48,8 @@ router.post("/getbyid", async (req: Request, res: Response) => {
     }
     return res.status(404).json({ msg: "Not Found" });
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -113,7 +114,8 @@ router.post("/browse", async (req: Request, res: Response) => {
 
     return res.status(200).json(ads.map((ad) => ad._id));
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -123,7 +125,8 @@ router.get("/tags", async (req: Request, res: Response) => {
     const tags = await Tag.find({}, { _id: 0, name: 1 }).lean();
     return res.status(200).json(tags);
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -156,7 +159,8 @@ router.get("/profile", auth, async (req: Request, res: Response) => {
 
     return res.status(200).json(convertAds(ads));
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -268,7 +272,8 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
     const session = await createPaymentSession(ad, user.email);
     return res.status(200).json({ url: session.url });
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -299,7 +304,8 @@ router.put("/pay", auth, async (req: Request, res: Response) => {
     const session = await createPaymentSession(ad, user.email);
     return res.status(200).json({ url: session.url });
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -363,7 +369,8 @@ router.put("/", auth, async (req: Request, res: Response) => {
 
     return res.status(404).json({ msg: "Not Found" });
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -406,7 +413,8 @@ router.put("/cancel", auth, async (req: Request, res: Response) => {
 
     return res.status(200).json({ _id: ad._id });
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -451,7 +459,8 @@ router.delete("/", auth, async (req: Request, res: Response) => {
 
     return res.status(200).json({ _id: ad._id });
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 

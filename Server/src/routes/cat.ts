@@ -12,7 +12,8 @@ router.get("/", async (req: Request, res: Response) => {
     const result = await Cat.find({}).lean();
     return res.status(200).json(result);
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -35,7 +36,8 @@ router.post("/", auth, async (req: Request, res: Response) => {
 
     return res.status(200).json(cat);
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 
@@ -64,7 +66,8 @@ router.put("/", auth, async (req: Request, res: Response) => {
 
     return res.status(200).json(cat);
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 

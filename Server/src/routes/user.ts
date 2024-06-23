@@ -50,7 +50,8 @@ router.post("/login", async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    return res.status(500).json(error);
+    console.log(JSON.stringify(error));
+    return res.status(500).json("error");
   }
 });
 

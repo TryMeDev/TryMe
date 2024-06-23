@@ -19,7 +19,7 @@ const SetLinks: React.FC<{
     <>
       <h2>{t("create.setLinks.title")}</h2>
       {imgs.map((img, idx) => (
-        <div className="w-full flex items-center gap-2" key={idx}>
+        <div className="w-full flex items-center gap-2 mt-1" key={idx}>
           <Image
             preview
             alt={img.name}

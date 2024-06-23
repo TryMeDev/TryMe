@@ -141,6 +141,7 @@ const Detail: React.FC = () => {
                     href={`https://${link}`}
                     className="text-lg overflow-clip w-full"
                     key={idx}
+                    target="_blank"
                   >
                     {link && `${t("detail.link")}${idx + 1}: ${link}`}
                   </a>

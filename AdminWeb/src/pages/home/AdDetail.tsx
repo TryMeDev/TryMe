@@ -116,7 +116,12 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
           })}
         </div>
         {ad?.links.map((link, idx) => (
-          <a href={link} className="text-lg overflow-clip w-full" key={idx}>
+          <a
+            href={link}
+            target="_blank"
+            className="text-lg overflow-clip w-full"
+            key={idx}
+          >
             {link && `${t("link")}${idx + 1}: ${link}`}
           </a>
         ))}
@@ -158,7 +163,6 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
           <Chips
             value={tags}
             onChange={(e: ChipsChangeEvent) => {
-              console.log(e.value);
               setTags(e.value || []);
             }}
             separator=","
