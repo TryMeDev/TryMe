@@ -60,11 +60,10 @@ const AppBar: React.FC<{ children?: React.ReactNode; canLogout?: boolean }> = ({
         }}
         options={langList}
         optionLabel="nativeName"
-        className="w-full"
       />
       {canLogout && (
         <Button
-          className="py-0 px-1"
+          className="py-0 px-1 ml-1"
           label={t("login.logout")}
           onClick={() => {
             localStorage.removeItem("token");

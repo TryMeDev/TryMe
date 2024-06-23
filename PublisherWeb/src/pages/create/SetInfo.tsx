@@ -13,8 +13,8 @@ import { division } from "./Create";
 import useProfile from "../../hooks/useProfile";
 import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
-import Instructions from "../instructions/Instructions";
-import FAQ from "../faq/FAQ";
+import FAQContent from "../faq/FAQContent";
+import InstructionsContent from "../instructions/InstructionsContent";
 
 const MINIMUM_CHARGE = 5;
 
@@ -227,7 +227,9 @@ const SetInfo: React.FC<{
           setIsInstructionsVisible(false);
         }}
       >
-        <Instructions />
+        <div className="w-full h-full flex flex-col p-4">
+          <InstructionsContent />
+        </div>
       </Dialog>
       <Dialog
         header={t("faq.faq")}
@@ -237,7 +239,9 @@ const SetInfo: React.FC<{
           setIsFAQVisible(false);
         }}
       >
-        <FAQ />
+        <div className="w-full h-full flex flex-col p-4">
+          <FAQContent />
+        </div>
       </Dialog>
     </>
   );
