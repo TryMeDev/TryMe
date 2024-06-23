@@ -34,10 +34,10 @@ const Login = () => {
     <div className="w-full h-full flex flex-col">
       <LoadingScreen isLoading={isLoading} />
       <AppBar canLogout={false} />
-      <div className="flex-1 flex flex-col justify-center p-4">
+      <div className="flex-1 flex flex-col justify-center p-4 ">
         <Toast ref={toast} />
-        <h1 className="text-6xl text-[#80f]">只要有才華</h1>
-        <h2 className="text-4xl text-yellow-300">就能有曝光</h2>
+        <h1 className="text-4xl font-semibold">{t("login.heading")}</h1>
+        <h2 className="text-2xl">{t("login.subHeading")}</h2>
         <div className="mt-4">
           <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ""}>
             <GoogleLogin
@@ -53,7 +53,7 @@ const Login = () => {
               }}
             />
           </GoogleOAuthProvider>
-          <div className="text-gray-300">{t("login.hint")}</div>
+          <div className="text-gray-700 text-sm">{t("login.hint")}</div>
         </div>
       </div>
     </div>

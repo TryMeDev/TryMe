@@ -30,6 +30,7 @@ app.use(
   })
 );
 
+app.set("trust proxy", 10);
 app.use(limiter);
 
 app.use("/stripe", stripeRouter);

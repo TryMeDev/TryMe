@@ -24,6 +24,7 @@ import Error from "../../components/Error";
 import { Dropdown } from "primereact/dropdown";
 import { langs } from "../../assets/langs";
 import { useAppDispatch } from "../../app/store";
+import { PUBLISHER_URL } from "../../config";
 
 export type division = {
   label: string;
@@ -111,7 +112,7 @@ const Settings: React.FC = () => {
             />
           </div>
 
-          <div className="w-full p-3">
+          <div className="w-full min-h-[90%] p-3">
             <LoadingScreen isLoading={isCatsLoading} />
 
             <div>
@@ -204,6 +205,11 @@ const Settings: React.FC = () => {
                   }}
                 />
               ))}
+            </div>
+
+            <div className="mt-3 flex flex-col">
+              <a href={`${PUBLISHER_URL}aboutus`}>{t("settings.aboutUs")}</a>
+              <a href={`${PUBLISHER_URL}faq`}>{t("settings.faq")}</a>
             </div>
           </div>
         </>

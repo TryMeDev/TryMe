@@ -27,7 +27,7 @@ i18n
     resources: {
       en: {
         translation: {
-          share: { notFound: "Sorry, the advertisement may be removed" },
+          share: { notFound: "Sorry, the post may be removed" },
           error: {
             title: "Oops",
             message: "An unexpected error has occurred.",
@@ -35,9 +35,9 @@ i18n
           },
           home: {
             noRecommendations:
-              "We're sorry, we couldn't provide any recommendations for you. Please change your preferences or wait for more ads to be published.",
+              "We're sorry, we couldn't provide any recommendations for you. Please change your preferences or wait for more posts to be published.",
             noSearchResult:
-              "No search results found. Please change your searching tags, change your interested categories, or wait for more ads to be published.",
+              "No search results found. Please change your searching tags, change your interested categories, or wait for more posts to be published.",
             getIdsError:
               "An error has occurred. Please ensure you are connected to the network and try reloading. If the issue persists, please try again later.",
           },
@@ -72,7 +72,7 @@ i18n
       },
       "zh-TW": {
         translation: {
-          share: { notFound: "非常抱歉，連結的廣告可能已被移除" },
+          share: { notFound: "非常抱歉，連結的帖子可能已被移除" },
           error: {
             title: "糟糕",
             message: "發生了意外錯誤。",
@@ -80,9 +80,9 @@ i18n
           },
           home: {
             noRecommendations:
-              "很抱歉，我們未能給你推薦任何廣告，請更改你的喜好或等待廣告商投放更多廣告",
+              "很抱歉，我們未能給你推薦任何帖子，請更改你的喜好或等待創作者投放更多帖子",
             noSearchResult:
-              "沒有搜尋結果，請更改搜尋標簽，或更改不感興趣的類別，或等待廣告商投放更多廣告",
+              "沒有搜尋結果，請更改搜尋標簽，或更改不感興趣的類別，或等待創作者投放更多帖子",
             getIdsError:
               "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",
           },
@@ -91,6 +91,8 @@ i18n
             is18: "我已年滿18歲",
             isNot18: "我未年滿18歲",
             interestedCats: "請取消勾選你不感興趣的類別",
+            aboutUs: "關於我們",
+            faq: "FAQ",
           },
           search: {
             getTagsError:
@@ -101,7 +103,7 @@ i18n
           bookmarks: {
             bookmarks: "我的收藏",
             deleteConfirmHeader: "確認刪除",
-            deleteConfirmMsg: "你是否確認要取消收藏已選擇的廣告？",
+            deleteConfirmMsg: "你是否確認要取消收藏已選擇的帖子？",
           },
           getByIdError:
             "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",
