@@ -27,6 +27,8 @@ i18n
     resources: {
       en: {
         translation: {
+          privacyPolicy: "Privacy Policy",
+          termsOfService: "Terms of Service",
           login: {
             failedSummary: "Login Fails",
             failedDetail: "Please check if the email address is valid",
@@ -199,6 +201,8 @@ i18n
       },
       "zh-TW": {
         translation: {
+          privacyPolicy: "隱私權政策",
+          termsOfService: "條款及細則",
           login: {
             failedSummary: "登入失敗",
             failedDetail: "請檢查電子郵件地址是否有效",

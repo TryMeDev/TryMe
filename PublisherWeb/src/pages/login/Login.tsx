@@ -54,6 +54,21 @@ const Login = () => {
             />
           </GoogleOAuthProvider>
           <div className="text-gray-700 text-sm">{t("login.hint")}</div>
+
+          <div className="flex gap-1">
+            <a
+              className="underline text-gray-700 text-sm"
+              href="https://www.termsfeed.com/live/b1a4cb1c-6bed-4ed0-91e8-215086dea7e0"
+            >
+              {t("termsOfService")}
+            </a>
+            <a
+              className="underline text-gray-700 text-sm"
+              href="https://www.termsfeed.com/live/b986215a-08ec-420e-9542-0b3157bf1fb1"
+            >
+              {t("privacyPolicy")}
+            </a>
+          </div>
         </div>
       </div>
     </div>
