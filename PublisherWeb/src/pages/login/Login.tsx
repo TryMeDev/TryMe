@@ -7,6 +7,7 @@ import { GOOGLE_CLIENT_ID } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AppBar from "../../components/AppBar";
+import Slider from "react-slick";
 
 const Login = () => {
   const [login, { isLoading, isError, isSuccess }] = useLoginMutation();
@@ -34,42 +35,51 @@ const Login = () => {
     <div className="w-full h-full flex flex-col">
       <LoadingScreen isLoading={isLoading} />
       <AppBar canLogout={false} />
-      <div className="flex-1 flex flex-col justify-center p-4 ">
-        <Toast ref={toast} />
-        <h1 className="text-4xl font-semibold">{t("login.heading")}</h1>
-        <h2 className="text-2xl">{t("login.subHeading")}</h2>
-        <div className="mt-4">
-          <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ""}>
-            <GoogleLogin
-              onSuccess={(credentials) => {
-                login({ credentials });
-              }}
-              onError={() => {
-                toast.current?.show({
-                  severity: "error",
-                  summary: t("login.failedSummary"),
-                  detail: t("login.failedDetail"),
-                });
-              }}
-            />
-          </GoogleOAuthProvider>
-          <div className="text-gray-700 text-sm">{t("login.hint")}</div>
+      <Toast ref={toast} />
 
-          <div className="flex gap-1">
-            <a
-              className="underline text-gray-700 text-sm"
-              href="https://www.termsfeed.com/live/b1a4cb1c-6bed-4ed0-91e8-215086dea7e0"
-            >
-              {t("termsOfService")}
-            </a>
-            <a
-              className="underline text-gray-700 text-sm"
-              href="https://www.termsfeed.com/live/b986215a-08ec-420e-9542-0b3157bf1fb1"
-            >
-              {t("privacyPolicy")}
-            </a>
+      <div className="flex-grow overflow-auto">
+        <Slider className="h-full w-full">
+          <div className="h-full w-full !flex flex-col justify-center items-center p-4">
+            <h1 className="text-4xl font-semibold text-center">
+              {t("login.heading")}
+            </h1>
+            <h2 className="text-2xl text-center">{t("login.subHeading")}</h2>
+            <div className="mt-4 flex flex-col justify-center items-center">
+              <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || ""}>
+                <GoogleLogin
+                  onSuccess={(credentials) => {
+                    login({ credentials });
+                  }}
+                  onError={() => {
+                    toast.current?.show({
+                      severity: "error",
+                      summary: t("login.failedSummary"),
+                      detail: t("login.failedDetail"),
+                    });
+                  }}
+                />
+              </GoogleOAuthProvider>
+              <div className="text-gray-700 text-sm text-center">
+                {t("login.hint")}
+              </div>
+
+              <div className="flex gap-1 justify-center">
+                <a
+                  className="underline text-gray-700 text-sm"
+                  href="https://www.termsfeed.com/live/b1a4cb1c-6bed-4ed0-91e8-215086dea7e0"
+                >
+                  {t("termsOfService")}
+                </a>
+                <a
+                  className="underline text-gray-700 text-sm"
+                  href="https://www.termsfeed.com/live/b986215a-08ec-420e-9542-0b3157bf1fb1"
+                >
+                  {t("privacyPolicy")}
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
+        </Slider>
       </div>
     </div>
   );

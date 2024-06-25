@@ -209,6 +209,15 @@ const Settings: React.FC = () => {
 
             <div className="mt-3 flex flex-col">
               <a
+                className="underline"
+                href={`${PUBLISHER_URL}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("settings.publish")}
+              </a>
+              <a
+                className="underline"
                 href={`${PUBLISHER_URL}aboutus`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -216,6 +225,7 @@ const Settings: React.FC = () => {
                 {t("settings.aboutUs")}
               </a>
               <a
+                className="underline"
                 href={`${PUBLISHER_URL}faq`}
                 target="_blank"
                 rel="noopener noreferrer"
