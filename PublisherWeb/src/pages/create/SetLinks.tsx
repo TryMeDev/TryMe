@@ -24,7 +24,8 @@ const SetLinks: React.FC<{
             preview
             alt={img.name}
             src={img.objectURL}
-            imageClassName="w-[15vw] h-[calc(15vw*16/9)]"
+            className="w-[15vw] aspect-[9/16] overflow-hidden"
+            imageClassName="w-full h-full object-cover"
           />
           <InputText
             className="flex-grow"

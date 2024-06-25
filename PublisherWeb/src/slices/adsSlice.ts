@@ -89,7 +89,7 @@ const adsSlice = apiSlice.injectEndpoints({
             const oldAd = draft.find((ad) => ad._id === adId);
             if (oldAd) {
               return [
-                ...draft.filter((ad) => ad._id === adId),
+                ...draft.filter((ad) => ad._id !== adId),
                 { ...oldAd, status: "canceled" },
               ];
             }

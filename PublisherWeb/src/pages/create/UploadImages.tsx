@@ -7,6 +7,7 @@ import {
   FileUploadSelectEvent,
   ItemTemplateOptions,
 } from "primereact/fileupload";
+import { Image } from "primereact/image";
 import { ProgressBar } from "primereact/progressbar";
 import { Tag } from "primereact/tag";
 import { Toast } from "primereact/toast";
@@ -85,10 +86,11 @@ const UploadImages: React.FC<{ handleConfirmed: (imgs: File2[]) => void }> = ({
           const file = inFile as File2;
           return (
             <div className="w-full flex gap-4">
-              <img
+              <Image
                 alt={file.name}
                 src={file.objectURL}
-                className="w-[15vw] h-[calc(15vw*16/9)]"
+                className="w-[15vw] aspect-[9/16] overflow-hidden"
+                imageClassName="w-full h-full object-cover"
               />
               <div className="flex flex-col items-start">
                 <span>{file.name}</span>
