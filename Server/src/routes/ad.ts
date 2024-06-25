@@ -26,6 +26,16 @@ function convertAds(ads: any[]) {
   return ads.map((ad) => convertAd(ad));
 }
 
+// use set is faster for large array; for loop is faster for small array
+function hasIntersection(arr1: any[], arr2: any[]) {
+  for (let item of arr1) {
+    if (arr2.includes(item)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 // audience get by id after browse
 router.post("/getbyid", async (req: Request, res: Response) => {
   try {
@@ -243,10 +253,12 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
     if (
       isTimeConflict(
         { startDate, endDate },
-        userAds.map((ad: any) => ({
-          startDate: ad.startDate,
-          endDate: ad.endDate,
-        }))
+        userAds
+          .filter((ad) => hasIntersection(locations, ad.locations))
+          .map((ad: any) => ({
+            startDate: ad.startDate,
+            endDate: ad.endDate,
+          }))
       )
     ) {
       return res.status(400).json({ msg: "Bad Request" });
@@ -396,7 +408,7 @@ router.put("/cancel", auth, async (req: Request, res: Response) => {
       return res.status(400).json({ msg: "Bad Request" });
     }
 
-    if (!user.adIds.includes(new mongoose.Types.ObjectId(adId))) {
+    if (!user.adIds.some((id) => id.toString() === adId)) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
 
@@ -440,7 +452,7 @@ router.delete("/", auth, async (req: Request, res: Response) => {
       return res.status(400).json({ msg: "Bad Request" });
     }
 
-    if (!user.adIds.includes(new mongoose.Types.ObjectId(adId))) {
+    if (!user.adIds.some((id) => id.toString() === adId)) {
       return res.status(401).json({ msg: "Unauthorized" });
     }
 

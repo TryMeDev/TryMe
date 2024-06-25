@@ -18,6 +18,15 @@ import InstructionsContent from "../instructions/InstructionsContent";
 
 const MINIMUM_CHARGE = 5;
 
+function hasIntersection(arr1: any[], arr2: any[]) {
+  for (let item of arr1) {
+    if (arr2.includes(item)) {
+      return true;
+    }
+  }
+  return false;
+}
+
 type region = {
   label: string;
   code: string;
@@ -92,9 +101,10 @@ const SetInfo: React.FC<{
         profile
           ?.filter(
             (ad) =>
-              ad.status === "unpaid" ||
-              ad.status === "paid" ||
-              ad.status === "approved"
+              (ad.status === "unpaid" ||
+                ad.status === "paid" ||
+                ad.status === "approved") &&
+              hasIntersection(divisions, ad.locations)
           )
           .map((ad) => ({
             startDate: new Date(ad.startDate),
