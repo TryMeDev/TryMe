@@ -36,3 +36,6 @@ body {
 .slick-slide > div {
   height: 100%;
 }
+.slick-dots {
+  bottom: 15px;
+}

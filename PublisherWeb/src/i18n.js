@@ -37,6 +37,18 @@ i18n
             heading: "Breaking the Recommendation Algorithm",
             subHeading:
               "Providing Equal Exposure for Small Businesses, Bringing Free Exploration to Users",
+            page2Heading: "Fair Competition",
+            page2Content:
+              "TryMe abandons traditional recommendation systems, offering equal display opportunities for all merchants. Regardless of size, every merchant can receive deserved exposure",
+            page3Heading: "Creative Freedom",
+            page3Content:
+              "We encourage merchants to freely express their creativity without sacrificing content uniqueness and diversity to cater to algorithms",
+            page4Heading: "Breaking Information Bubbles",
+            page4Content:
+              "Users can access a wider range of content, broadening their horizons and enhancing understanding of different perspectives",
+            page5Heading: "Privacy Protection",
+            page5Content:
+              "We don't collect personal data for content recommendations, fully respecting users' privacy rights",
           },
           home: {
             yourAds: "Your Posts",
@@ -210,6 +222,18 @@ i18n
             hint: "Google Chrome的某些擴充功能會導致無法登錄，如你無法登錄請嘗試停用它們",
             heading: "打破推薦算法",
             subHeading: "為商戶提供平等曝光，為用戶帶來自由探索",
+            page2Heading: "公平競爭",
+            page2Content:
+              "TryMe摒棄了傳統的推薦系統,為所有商戶提供平等的展示機會。無論規模大小,每個商戶都能獲得應有的曝光",
+            page3Heading: "創意自由",
+            page3Content:
+              "我們鼓勵商戶自由發揮創意,不必為迎合算法而犧牲內容的獨特性和多樣性",
+            page4Heading: "打破信息茧房",
+            page4Content:
+              "用戶可以接觸到更廣泛的內容,擴展視野,增進對不同觀點的了解",
+            page5Heading: "保護隱私",
+            page5Content:
+              "我們不收集用戶的個人數據來進行內容推薦,充分尊重用戶的隱私權",
           },
           home: {
             yourAds: "您的帖子",
