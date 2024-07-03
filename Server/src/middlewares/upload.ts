@@ -55,6 +55,7 @@ export const uploadImages = async (
       (req.files as Express.Multer.File[]) = resizedImages;
       next();
     } catch (error) {
+      console.log(JSON.stringify(error));
       return res.status(500).json({ error: "Error resizing images" });
     }
   });

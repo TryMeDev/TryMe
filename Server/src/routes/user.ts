@@ -16,6 +16,7 @@ async function verifyGoogleToken(token: string) {
     });
     return { payload: ticket.getPayload() };
   } catch (error) {
+    console.log(JSON.stringify(error));
     return { error: "Invalid user detected. Please try again" };
   }
 }

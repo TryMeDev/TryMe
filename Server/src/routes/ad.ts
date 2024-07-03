@@ -214,6 +214,8 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
     const pipeline = [{ $match: query }, { $sample: { size: 1 } }];
 
     const [ad] = await Ad.aggregate(pipeline);
+    console.log(JSON.stringify(pipeline));
+    console.log(ad);
 
     if (ad) {
       return res.status(200).json(convertAd(ad));
@@ -221,7 +223,7 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
       return res.status(404).json({ msg: "Not Found" });
     }
   } catch (error) {
-    console.error(error);
+    console.log(JSON.stringify(error));
     return res.status(500).json({ msg: "Internal server error" });
   }
 });
