@@ -37,7 +37,8 @@ const TopButtons: React.FC<{
           className="bg-opacity-10 bg-black"
           text
           rounded
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             navigate("search");
           }}
         />
@@ -48,7 +49,8 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               navigate("settings");
             }}
           />
@@ -57,7 +59,8 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               navigate("bookmarks");
             }}
           />
@@ -66,11 +69,12 @@ const TopButtons: React.FC<{
       <div>
         {currentAd && currentAdId && (
           <Button
-            icon="pi pi-clipboard"
+            icon="pi pi-share-alt"
             className="bg-opacity-10 bg-black"
             text
             rounded
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               navigator.clipboard.writeText(`${LOCAL_URL}${currentAdId}`);
               toast.current?.show({
                 severity: "success",
@@ -88,7 +92,8 @@ const TopButtons: React.FC<{
               className="bg-opacity-10 bg-black"
               text
               rounded
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 deleteBookmark(currentAdId);
               }}
             />
@@ -98,7 +103,8 @@ const TopButtons: React.FC<{
               className="bg-opacity-10 bg-black"
               text
               rounded
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 addBookmark(currentAd);
               }}
             />
@@ -109,7 +115,8 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               navigate("search");
             }}
           />

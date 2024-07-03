@@ -151,7 +151,7 @@ const Detail: React.FC = () => {
 
                 {ad?.links.map((link, idx) => (
                   <a
-                    href={`https://${link}`}
+                    href={link}
                     className="text-lg overflow-clip w-full"
                     key={idx}
                     target="_blank"

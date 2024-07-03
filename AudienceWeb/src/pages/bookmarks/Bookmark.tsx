@@ -20,16 +20,24 @@ const Bookmark: React.FC<{
       <Toast ref={toast} />
       <div className="w-full h-full flex flex-col">
         <div className="w-full flex justify-between p-1 absolute">
-          <Button icon="pi pi-chevron-left" text onClick={onBack} />
+          <Button
+            icon="pi pi-chevron-left"
+            text
+            onClick={(e) => {
+              e.stopPropagation();
+              onBack();
+            }}
+          />
 
           {bookmark?._id && (
             <div>
               <Button
-                icon="pi pi-clipboard"
+                icon="pi pi-share-alt"
                 className="bg-opacity-10 bg-black"
                 text
                 rounded
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   navigator.clipboard.writeText(`${LOCAL_URL}${bookmark?._id}`);
                   toast.current?.show({
                     severity: "success",
@@ -41,7 +49,8 @@ const Bookmark: React.FC<{
               <Button
                 icon="pi pi-bookmark-fill"
                 text
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   onDelete();
                 }}
               />

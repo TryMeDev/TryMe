@@ -109,7 +109,7 @@ i18n
             setLinks: {
               title:
                 "Please set the links (user will be redirected to the link after clicking the images)",
-              placeholder: "www.example.com (without https://)",
+              placeholder: "https://www.example.com",
               back: "Back",
               next: "Next",
             },
@@ -292,7 +292,7 @@ i18n
             },
             setLinks: {
               title: "請設定連結（用戶點擊圖片後會被帶到連結中）",
-              placeholder: "www.example.com (不要輸入https://)",
+              placeholder: "https://www.example.com",
               back: "返回",
               next: "下一步",
             },

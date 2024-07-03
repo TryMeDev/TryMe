@@ -8,12 +8,14 @@ const ImageSlider: React.FC<{ bookmark: ad }> = ({ bookmark }) => {
     <Slider adaptiveHeight infinite={false}>
       {bookmark?.imgs?.map((img, idx) => {
         return (
-          <Image
-            key={idx}
-            src={img}
-            loading="lazy"
-            imageClassName="h-[100svh] w-[100svw] object-contain"
-          />
+          <a href={bookmark.links[idx]}>
+            <Image
+              key={idx}
+              src={img}
+              loading="lazy"
+              imageClassName="h-[100svh] w-[100svw] object-contain"
+            />
+          </a>
         );
       })}
     </Slider>

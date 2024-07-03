@@ -185,7 +185,7 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
 
     const { search, earlierThan, locations, statuses } = req.body;
 
-    const query: any = { $or: [] };
+    const query: any = { $and: [] };
     if (isValidObjectId(search)) {
       const ad = await Ad.findById(search);
       if (ad) {
@@ -194,21 +194,21 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
     }
 
     if (locations) {
-      query.$or.push({ locations: { $in: locations } });
+      query.$and.push({ locations: { $in: locations } });
     }
 
     if (statuses) {
-      query.$or.push({ status: { $in: statuses } });
+      query.$and.push({ status: { $in: statuses } });
     }
 
     if (earlierThan) {
-      query.$or.push({
+      query.$and.push({
         startDate: { $lte: new Date(earlierThan as string) },
       });
     }
 
     if (search && typeof search === "string") {
-      query.$or.push({ $text: { $search: search } });
+      query.$and.push({ $text: { $search: search } });
     }
 
     const ad = await Ad.findOne(query).lean();
