@@ -193,11 +193,11 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
       }
     }
 
-    if (locations) {
+    if (Array.isArray(locations) && locations.length !== 0) {
       query.$and.push({ locations: { $in: locations } });
     }
 
-    if (statuses) {
+    if (Array.isArray(statuses) && statuses.length !== 0) {
       query.$and.push({ status: { $in: statuses } });
     }
 
@@ -214,8 +214,6 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
     const pipeline = [{ $match: query }, { $sample: { size: 1 } }];
 
     const [ad] = await Ad.aggregate(pipeline);
-    console.log(JSON.stringify(pipeline));
-    console.log(ad);
 
     if (ad) {
       return res.status(200).json(convertAd(ad));

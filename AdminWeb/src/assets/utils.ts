@@ -1,8 +1,18 @@
 import { status } from "../slices/adsSlice";
 
-export const addDays = (days: number, date: Date = new Date()): Date => {
+export const addDays = (
+  days: number,
+  date: Date = new Date(),
+  isNoon = true
+): Date => {
   const copyDate = new Date(date);
   copyDate.setDate(copyDate.getDate() + days);
+  if (isNoon) {
+    copyDate.setHours(0);
+    copyDate.setMinutes(0);
+    copyDate.setSeconds(0);
+    copyDate.setMilliseconds(0);
+  }
   return copyDate;
 };
 
