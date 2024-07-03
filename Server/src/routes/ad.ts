@@ -187,7 +187,7 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
 
     const query: any = { $and: [] };
     if (isValidObjectId(search)) {
-      const ad = await Ad.findById(search);
+      const ad = await Ad.findById(search).lean();
       if (ad) {
         return res.status(200).json(convertAd(ad));
       }
@@ -211,7 +211,10 @@ router.post("/adminsearch", auth, async (req: Request, res: Response) => {
       query.$and.push({ $text: { $search: search } });
     }
 
-    const ad = await Ad.findOne(query).lean();
+    const pipeline = [{ $match: query }, { $sample: { size: 1 } }];
+
+    const [ad] = await Ad.aggregate(pipeline);
+
     if (ad) {
       return res.status(200).json(convertAd(ad));
     } else {
