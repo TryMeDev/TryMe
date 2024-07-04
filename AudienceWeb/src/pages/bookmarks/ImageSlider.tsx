@@ -8,7 +8,11 @@ const ImageSlider: React.FC<{ bookmark: ad }> = ({ bookmark }) => {
     <Slider adaptiveHeight infinite={false}>
       {bookmark?.imgs?.map((img, idx) => {
         return (
-          <a href={bookmark.links[idx]}>
+          <a
+            href={bookmark.links[idx]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               key={idx}
               src={img}

@@ -28,7 +28,7 @@ const ImageSlider: React.FC<{
       <Slider adaptiveHeight infinite={false}>
         {ad?.imgs?.map((img, idx) => {
           return (
-            <a href={ad.links[idx]}>
+            <a href={ad.links[idx]} target="_blank" rel="noopener noreferrer">
               <Image
                 key={idx}
                 src={img}
