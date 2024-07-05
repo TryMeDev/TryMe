@@ -109,7 +109,10 @@ const SetInfo: React.FC<{
               (ad.status === "unpaid" ||
                 ad.status === "paid" ||
                 ad.status === "approved") &&
-              hasIntersection(divisions, ad.locations)
+              hasIntersection(
+                divisions.map((division) => division.value),
+                ad.locations
+              )
           )
           .map((ad) => ({
             startDate: new Date(ad.startDate),

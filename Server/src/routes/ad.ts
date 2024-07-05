@@ -258,7 +258,7 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
         { startDate, endDate },
         userAds
           .filter((ad) => hasIntersection(locations, ad.locations))
-          .map((ad: any) => ({
+          .map((ad) => ({
             startDate: ad.startDate,
             endDate: ad.endDate,
           }))

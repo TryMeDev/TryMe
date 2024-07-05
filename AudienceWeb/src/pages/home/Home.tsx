@@ -59,7 +59,7 @@ const Home: React.FC = () => {
           infinite={false}
           vertical
           verticalSwiping
-          afterChange={(newPage) => {
+          beforeChange={(currentPage, newPage) => {
             setCurrentPage(newPage);
           }}
         >

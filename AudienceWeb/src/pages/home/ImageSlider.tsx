@@ -40,10 +40,19 @@ const ImageSlider: React.FC<{
 
       <Slider adaptiveHeight infinite={false}>
         {ad?.imgs?.map((img, idx) => {
-          return (
-            <a href={ad.links[idx]} target="_blank" rel="noopener noreferrer">
+          return ad.links[idx] === "" ? (
+            <Image
+              src={img}
+              imageClassName="h-[100svh] w-[100svw] object-contain"
+            />
+          ) : (
+            <a
+              key={idx}
+              href={ad.links[idx]}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
-                key={idx}
                 src={img}
                 imageClassName="h-[100svh] w-[100svw] object-contain"
               />
