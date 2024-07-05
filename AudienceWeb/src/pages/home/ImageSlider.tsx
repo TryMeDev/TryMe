@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useTranslation } from "react-i18next";
-import { ad } from "../../slices/adsSlice";
+import { ad, useGetByIdQuery } from "../../slices/adsSlice";
 import Error from "../../components/Error";
 import { Image } from "primereact/image";
 import Slider from "react-slick";
 
 const ImageSlider: React.FC<{
-  ad?: ad;
-  isGetByIdLoading: boolean;
-  isGetByIdError: boolean;
-  reGetById: () => void;
-}> = ({ ad, isGetByIdLoading, isGetByIdError, reGetById }) => {
+  adId: string;
+  isShown: boolean;
+  addAd: (newAd: ad) => void;
+}> = ({ adId, isShown, addAd }) => {
   const { t } = useTranslation();
+
+  const {
+    data: ad,
+    isError: isGetByIdError,
+    isLoading: isGetByIdLoading,
+    isSuccess: isGetByIdSuccess,
+    refetch: reGetById,
+  } = useGetByIdQuery({ _id: adId }, { skip: !isShown });
+
+  useEffect(() => {
+    if (isGetByIdSuccess) {
+      addAd(ad);
+    }
+  }, [isGetByIdSuccess]);
 
   return isGetByIdError ? (
     <Error
@@ -32,7 +45,6 @@ const ImageSlider: React.FC<{
               <Image
                 key={idx}
                 src={img}
-                loading="lazy"
                 imageClassName="h-[100svh] w-[100svw] object-contain"
               />
             </a>

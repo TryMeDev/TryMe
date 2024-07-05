@@ -30,13 +30,15 @@ const SetLinks: React.FC<{
           <InputText
             className="flex-grow"
             value={links[idx]}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setLinks((prev) => [
-                ...prev.slice(0, idx),
-                e.target.value,
-                ...prev.slice(idx + 1),
-              ])
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (e.target.value.length <= 2048) {
+                setLinks((prev) => [
+                  ...prev.slice(0, idx),
+                  e.target.value,
+                  ...prev.slice(idx + 1),
+                ]);
+              }
+            }}
             placeholder={t("create.setLinks.placeholder")}
           />
         </div>

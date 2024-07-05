@@ -1,7 +1,12 @@
 import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import React, { useState } from "react";
-import { addDays, getDaysDifference, isTimeConflict } from "../../assets/utils";
+import {
+  addDays,
+  endOfDate,
+  getDaysDifference,
+  isTimeConflict,
+} from "../../assets/utils";
 import { regions } from "../../assets/regions";
 import {
   AutoComplete,
@@ -140,7 +145,7 @@ const SetInfo: React.FC<{
           if (e.value) {
             setStartDate(e.value);
             if (!endDate || endDate <= e.value) {
-              setEndDate(addDays(1, e.value));
+              setEndDate(endOfDate(addDays(1, e.value)));
             }
           }
         }}
@@ -160,7 +165,9 @@ const SetInfo: React.FC<{
         inputId="endDate"
         value={endDate}
         onChange={(e) => {
-          setEndDate(e.value || addDays(2));
+          if (e.value) {
+            setEndDate(endOfDate(e.value) || endOfDate(addDays(2)));
+          }
         }}
         minDate={startDate ? addDays(1, startDate) : addDays(2)}
         readOnlyInput

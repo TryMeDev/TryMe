@@ -3,7 +3,7 @@ import { useAppSelector } from "../../app/store";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { useGetByIdQuery, useGetIdsQuery } from "../../slices/adsSlice";
+import { ad, useGetIdsQuery, useLazyGetByIdQuery } from "../../slices/adsSlice";
 import Error from "../../components/Error";
 import NotFound from "./NotFound";
 import ImageSlider from "./ImageSlider";
@@ -16,6 +16,7 @@ const Home: React.FC = () => {
   const preference = useAppSelector((state) => state.preference);
   const { t } = useTranslation();
 
+  const [ads, setAds] = useState<{ [key: string]: ad }>({});
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   const isSearch = preference?.searchingTags?.length > 0;
@@ -33,13 +34,6 @@ const Home: React.FC = () => {
   });
 
   const currentAdId = adIds?.[currentPage];
-
-  const {
-    data: currentAd,
-    isError: isGetByIdError,
-    isLoading: isGetByIdLoading,
-    refetch: reGetById,
-  } = useGetByIdQuery({ _id: currentAdId || "" }, { skip: !currentAdId });
 
   useEffect(() => {
     if (!preference.isSet) {
@@ -72,19 +66,22 @@ const Home: React.FC = () => {
           {adIds?.map((adId) => (
             <ImageSlider
               key={adId}
-              ad={currentAd}
-              isGetByIdError={isGetByIdError}
-              isGetByIdLoading={isGetByIdLoading}
-              reGetById={reGetById}
+              adId={adId}
+              isShown={currentAdId === adId}
+              addAd={(newAd: ad) => {
+                setAds((prev) => ({ ...prev, [newAd._id]: newAd }));
+              }}
             />
           ))}
         </Slider>
 
-        <TopButtons
-          currentAd={currentAd}
-          currentAdId={currentAdId}
-          isSearch={isSearch}
-        />
+        {currentAdId && currentAdId in ads && (
+          <TopButtons
+            currentAd={ads[currentAdId]}
+            currentAdId={currentAdId}
+            isSearch={isSearch}
+          />
+        )}
       </div>
     </>
   );

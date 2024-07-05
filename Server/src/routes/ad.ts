@@ -303,7 +303,7 @@ router.put("/pay", auth, async (req: Request, res: Response) => {
     }
 
     const { adId } = req.body;
-    if (!user.adIds.includes(adId)) {
+    if (!user.adIds.map((id) => id.toString()).includes(adId)) {
       return res.status(400).json({ msg: "Bad Request" });
     }
 

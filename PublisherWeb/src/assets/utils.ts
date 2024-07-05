@@ -14,6 +14,15 @@ export const addDays = (
   return copyDate;
 };
 
+export const endOfDate = (date: Date) => {
+  const copyDate = new Date(date);
+  copyDate.setHours(23);
+  copyDate.setMinutes(59);
+  copyDate.setSeconds(59);
+  copyDate.setMilliseconds(59);
+  return copyDate;
+};
+
 export function sortByDate<T>(arr: Array<T>, key: keyof T, asc = true) {
   const cloned = Array.from(arr);
   return cloned.sort((a, b) => {
@@ -41,15 +50,21 @@ export function displayDate(date: Date) {
   return formattedDateTime;
 }
 
-export function isTimeConflict(newDateRange: {startDate: Date, endDate: Date}, existingDateRanges: {startDate: Date, endDate: Date}[]): boolean {
+export function isTimeConflict(
+  newDateRange: { startDate: Date; endDate: Date },
+  existingDateRanges: { startDate: Date; endDate: Date }[]
+): boolean {
   for (const existingDateRange of existingDateRanges) {
     if (
-      (newDateRange.startDate >= existingDateRange.startDate && newDateRange.startDate < existingDateRange.endDate) ||
-      (newDateRange.endDate > existingDateRange.startDate && newDateRange.endDate <= existingDateRange.endDate) ||
-      (newDateRange.startDate <= existingDateRange.startDate && newDateRange.endDate >= existingDateRange.endDate)
+      (newDateRange.startDate >= existingDateRange.startDate &&
+        newDateRange.startDate < existingDateRange.endDate) ||
+      (newDateRange.endDate > existingDateRange.startDate &&
+        newDateRange.endDate <= existingDateRange.endDate) ||
+      (newDateRange.startDate <= existingDateRange.startDate &&
+        newDateRange.endDate >= existingDateRange.endDate)
     ) {
-      return true; 
+      return true;
     }
   }
-  return false; 
+  return false;
 }

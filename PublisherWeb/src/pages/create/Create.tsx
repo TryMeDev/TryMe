@@ -6,7 +6,7 @@ import { Steps } from "primereact/steps";
 import UploadImages, { File2 } from "./UploadImages";
 import SetLinks from "./SetLinks";
 import SetInfo from "./SetInfo";
-import { addDays } from "../../assets/utils";
+import { addDays, endOfDate } from "../../assets/utils";
 import { useCreateAdMutation } from "../../slices/adsSlice";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
@@ -37,7 +37,7 @@ const Create: React.FC = () => {
   const [links, setLinks] = useState<string[]>([]);
   const [divisions, setDivisions] = useState<division[]>([]);
   const [startDate, setStartDate] = useState<Date>(addDays(3));
-  const [endDate, setEndDate] = useState<Date>(addDays(8));
+  const [endDate, setEndDate] = useState<Date>(endOfDate(addDays(7)));
 
   const toast = useRef<Toast>(null);
 
