@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import { PrimeReactProvider } from "primereact/api";
@@ -8,17 +8,24 @@ import { getFromStorage } from "../slices/preferenceSlice";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
+  const [isStandalone, setIsStandalone] = useState(false);
+
+  useEffect(() => {
+    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
+  }, []);
 
   useEffect(() => {
     dispatch(getFromStorage({}));
   }, []);
 
-  return (
+  return isStandalone ? (
     <IndexedDBProvider databaseName="tryme" storeName="bookmarks">
       <PrimeReactProvider>
         <RouterProvider router={router} />
       </PrimeReactProvider>
     </IndexedDBProvider>
+  ) : (
+    <></>
   );
 };
 
