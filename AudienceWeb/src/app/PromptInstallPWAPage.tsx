@@ -38,6 +38,10 @@ const PromptInstallPWAPage: React.FC = () => {
       },
       steps: [
         {
+          en: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+          zh: "我們建議使用Google Chrome瀏覽這頁面（使用手機瀏覽體驗會更佳）",
+        },
+        {
           en: "Click on the install button at the right of the address bar",
           zh: "點擊網址列右面的下載按鈕",
         },
@@ -53,6 +57,10 @@ const PromptInstallPWAPage: React.FC = () => {
         zh: "在Mac上安裝TryMe",
       },
       steps: [
+        {
+          en: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+          zh: "我們建議使用Google Chrome瀏覽這頁面（使用手機瀏覽體驗會更佳）",
+        },
         {
           en: 'Click on the "..." menu in the top-right corner',
           zh: '點擊右上角的"..."選單',
@@ -73,6 +81,10 @@ const PromptInstallPWAPage: React.FC = () => {
         zh: "在iOS上安裝TryMe",
       },
       steps: [
+        {
+          en: "It's recommended to open this page with Google Chrome",
+          zh: "我們建議使用Google Chrome瀏覽這頁面",
+        },
         { en: "Tap the Share button", zh: "點擊分享按鈕" },
         {
           en: 'Scroll down and tap "Add to Home Screen"',
@@ -87,7 +99,14 @@ const PromptInstallPWAPage: React.FC = () => {
         zh: "在Android上安裝TryMe",
       },
       steps: [
-        { en: 'Tap the "..." menu', zh: '點擊"..."選單' },
+        {
+          en: "It's recommended to open this page with Google Chrome",
+          zh: "我們建議使用Google Chrome瀏覽這頁面",
+        },
+        {
+          en: 'Tap the "..." menu (if install button is not popped up)',
+          zh: '點擊"..."選單 （如沒有彈出安裝提示）',
+        },
         {
           en: 'Tap "Install app" or "Add to Home screen"',
           zh: '點擊"安裝應用程式"或"新增至主螢幕"',
@@ -104,6 +123,10 @@ const PromptInstallPWAPage: React.FC = () => {
         zh: "安裝說明",
       },
       steps: [
+        {
+          en: "It's recommended to open this page with Google Chrome (Better user experience using mobile phone)",
+          zh: "我們建議使用Google Chrome瀏覽這頁面（使用手機瀏覽體驗會更佳）",
+        },
         {
           en: "Look for an 'Install' or 'Add to Home Screen' option in your browser's menu",
           zh: "在瀏覽器選單中尋找「安裝」或「加到主畫面」選項",
