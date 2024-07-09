@@ -42,7 +42,7 @@ i18n
           },
           add: "Add",
           searchPlaceholder: "Ad ID / Links",
-          locations: "Locations",
+          locations: "Locations: ",
           "Earlier Than": "Earlier Than: ",
           "Select Statuses": "Select Statuses",
           Search: "Search",

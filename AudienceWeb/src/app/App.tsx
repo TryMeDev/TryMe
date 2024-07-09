@@ -5,6 +5,7 @@ import { PrimeReactProvider } from "primereact/api";
 import { IndexedDBProvider } from "./IndexedDBContext";
 import { useAppDispatch } from "./store";
 import { getFromStorage } from "../slices/preferenceSlice";
+import PromptInstallPWAPage from "./PromptInstallPWAPage";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ const App: React.FC = () => {
       </PrimeReactProvider>
     </IndexedDBProvider>
   ) : (
-    <></>
+    <PromptInstallPWAPage />
   );
 };
 
