@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import LoadingScreen from "../../components/LoadingScreen";
 import { useTranslation } from "react-i18next";
 import { ad, useGetByIdQuery } from "../../slices/adsSlice";
 import Error from "../../components/Error";
 import { Image } from "primereact/image";
 import Slider from "react-slick";
+import { Skeleton } from "primereact/skeleton";
 
 const ImageSlider: React.FC<{
   adId: string;
@@ -36,30 +36,32 @@ const ImageSlider: React.FC<{
     />
   ) : (
     <>
-      <LoadingScreen isLoading={isGetByIdLoading} />
-
-      <Slider adaptiveHeight infinite={false}>
-        {ad?.imgs?.map((img, idx) => {
-          return ad.links[idx] === "" ? (
-            <Image
-              src={img}
-              imageClassName="h-[100svh] w-[100svw] object-contain"
-            />
-          ) : (
-            <a
-              key={idx}
-              href={ad.links[idx]}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+      {isGetByIdLoading ? (
+        <Skeleton width="100svw" height="100swh" />
+      ) : (
+        <Slider adaptiveHeight infinite={false}>
+          {ad?.imgs?.map((img, idx) => {
+            return ad.links[idx] === "" ? (
               <Image
                 src={img}
                 imageClassName="h-[100svh] w-[100svw] object-contain"
               />
-            </a>
-          );
-        })}
-      </Slider>
+            ) : (
+              <a
+                key={idx}
+                href={ad.links[idx]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={img}
+                  imageClassName="h-[100svh] w-[100svw] object-contain"
+                />
+              </a>
+            );
+          })}
+        </Slider>
+      )}
     </>
   );
 };

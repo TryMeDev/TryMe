@@ -53,7 +53,7 @@ const Home: React.FC = () => {
   ) : (
     <>
       <LoadingScreen isLoading={isGetIdsLoading} />
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full h-full flex flex-col bg-black">
         <Slider
           adaptiveHeight
           infinite={false}
