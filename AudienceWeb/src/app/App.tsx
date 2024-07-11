@@ -9,7 +9,9 @@ import PromptInstallPWAPage from "./PromptInstallPWAPage";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [isStandalone, setIsStandalone] = useState(false);
+  const [isStandalone, setIsStandalone] = useState<false | true | "unknown">(
+    "unknown"
+  );
 
   useEffect(() => {
     setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
@@ -19,7 +21,9 @@ const App: React.FC = () => {
     dispatch(getFromStorage({}));
   }, []);
 
-  return isStandalone ? (
+  return isStandalone === "unknown" ? (
+    <></>
+  ) : isStandalone ? (
     <IndexedDBProvider databaseName="tryme" storeName="bookmarks">
       <PrimeReactProvider>
         <RouterProvider router={router} />
