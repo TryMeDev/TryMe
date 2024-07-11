@@ -83,6 +83,7 @@ export const preferenceSlice = createSlice({
         "notInterestedCats",
         JSON.stringify(state.notInterestedCats)
       );
+      state.isSet = true;
     },
     setSearchingTags: (
       state: preferenceState,
