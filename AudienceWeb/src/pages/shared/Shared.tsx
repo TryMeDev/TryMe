@@ -19,14 +19,14 @@ const Shared: React.FC = () => {
   return isGetByIdError ? (
     <NotFound reGetById={reGetById} />
   ) : (
-    <>
+    <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
       <LoadingScreen isLoading={isGetByIdLoading} />
-      <div className="w-full h-full flex flex-col">
-        <ImageSlider ad={ad} />
 
+      <div className="h-full w-full flex flex-col bg-black">
+        <ImageSlider ad={ad} />
         <TopButtons currentAd={ad} currentAdId={adId} />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -51,9 +51,9 @@ const Home: React.FC = () => {
   ) : !isGetIdsLoading && adIds?.length === 0 ? (
     <NotFound isSearch={isSearch} />
   ) : (
-    <>
+    <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
       <LoadingScreen isLoading={isGetIdsLoading} />
-      <div className="h-[100svh] w-[100svw] flex flex-col bg-black">
+      <div className="h-full w-full flex flex-col bg-black">
         <Slider
           adaptiveHeight
           infinite={false}
@@ -83,7 +83,7 @@ const Home: React.FC = () => {
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

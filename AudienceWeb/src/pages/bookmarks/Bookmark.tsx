@@ -15,10 +15,12 @@ const Bookmark: React.FC<{
   const toast = useRef<Toast>(null);
 
   return (
-    <>
+    <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
       <LoadingScreen isLoading={false} />
       <Toast ref={toast} />
-      <div className="w-full h-full flex flex-col">
+      <div className="h-full w-full flex flex-col bg-black">
+        {bookmark && <ImageSlider bookmark={bookmark} />}
+
         <div className="w-full flex justify-between p-1 absolute">
           <Button
             icon="pi pi-chevron-left"
@@ -57,10 +59,8 @@ const Bookmark: React.FC<{
             </div>
           )}
         </div>
-
-        {bookmark && <ImageSlider bookmark={bookmark} />}
       </div>
-    </>
+    </div>
   );
 };
 
