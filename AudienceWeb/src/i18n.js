@@ -46,7 +46,7 @@ i18n
             is18: "I am 18 years old or above",
             isNot18: "I am not 18 years old",
             interestedCats:
-              "Please uncheck the categories that you are not interested in",
+              "Please check the categories that you are interested in",
             publish: "I wanna publish a post",
             aboutUs: "About Us",
             faq: "FAQ",
@@ -93,7 +93,7 @@ i18n
             settings: "設定",
             is18: "我已年滿18歲",
             isNot18: "我未年滿18歲",
-            interestedCats: "請取消勾選你不感興趣的類別",
+            interestedCats: "請勾選你感興趣的類別",
             publish: "我想發佈帖子",
             aboutUs: "關於我們",
             faq: "FAQ",
