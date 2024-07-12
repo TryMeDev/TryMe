@@ -69,6 +69,10 @@ router.post("/browse", async (req: Request, res: Response) => {
     const { excludedCatIds, tags, locations, is18 } = req.body;
     const isBrowse = tags.length === 0;
 
+    const excludedCatObjectIds = excludedCatIds.map(
+      (stringId: string) => new mongoose.Types.ObjectId(stringId)
+    );
+
     let searchCriteria = {};
     if (isBrowse) {
       if (is18) {
@@ -77,7 +81,7 @@ router.post("/browse", async (req: Request, res: Response) => {
           endDate: { $gte: new Date() },
           locations: { $in: locations },
           startDate: { $lte: new Date() },
-          catIds: { $nin: excludedCatIds },
+          catIds: { $nin: excludedCatObjectIds },
         };
       } else {
         searchCriteria = {
@@ -86,7 +90,7 @@ router.post("/browse", async (req: Request, res: Response) => {
           endDate: { $gte: new Date() },
           locations: { $in: locations },
           startDate: { $lte: new Date() },
-          catIds: { $nin: excludedCatIds },
+          catIds: { $nin: excludedCatObjectIds },
         };
       }
     } else {
