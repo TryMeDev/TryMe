@@ -1,6 +1,6 @@
 import { apiSlice } from "./apiSlice";
 
-export type tag = string;
+export type tag = { name: string };
 
 type tagsResponse = tag[];
 

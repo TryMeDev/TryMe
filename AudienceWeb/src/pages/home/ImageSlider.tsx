@@ -39,7 +39,7 @@ const ImageSlider: React.FC<{
       {isGetByIdLoading ? (
         <Skeleton width="100svw" height="100swh" />
       ) : (
-        <Slider adaptiveHeight infinite={false}>
+        <Slider adaptiveHeight infinite={false} touchThreshold={10}>
           {ad?.imgs?.map((img, idx) => {
             return ad.links[idx] === "" ? (
               <Image

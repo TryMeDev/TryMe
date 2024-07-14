@@ -55,6 +55,7 @@ const Home: React.FC = () => {
       <LoadingScreen isLoading={isGetIdsLoading} />
       <div className="h-full w-full flex flex-col bg-black">
         <Slider
+          touchThreshold={20}
           adaptiveHeight
           infinite={false}
           vertical

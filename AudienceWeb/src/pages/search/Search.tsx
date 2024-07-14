@@ -86,7 +86,7 @@ const Search: React.FC = () => {
                 completeMethod={(e: AutoCompleteCompleteEvent) => {
                   if (tags) {
                     const newSuggestions = [];
-                    for (let tag of tags) {
+                    for (let tag of tags.map((tag) => tag.name)) {
                       if (tag.toLowerCase().includes(e.query.toLowerCase())) {
                         newSuggestions.push(tag);
                         if (newSuggestions.length >= SUGGESTION_NUM) {

@@ -5,7 +5,7 @@ import Slider from "react-slick";
 
 const ImageSlider: React.FC<{ bookmark: ad }> = ({ bookmark }) => {
   return (
-    <Slider adaptiveHeight infinite={false}>
+    <Slider adaptiveHeight infinite={false} touchThreshold={10}>
       {bookmark?.imgs?.map((img, idx) => {
         return bookmark.links[idx] === "" ? (
           <Image

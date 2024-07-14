@@ -7,7 +7,7 @@ const ImageSlider: React.FC<{
   ad?: ad;
 }> = ({ ad }) => {
   return (
-    <Slider adaptiveHeight infinite={false}>
+    <Slider adaptiveHeight infinite={false} touchThreshold={10}>
       {ad?.imgs?.map((img, idx) => {
         return ad.links[idx] === "" ? (
           <Image
