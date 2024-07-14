@@ -43,12 +43,12 @@ export const uploadImages = async (
         (req.files as Express.Multer.File[]).map(async (file) => {
           const buffer = await sharp(file.buffer)
             .resize(1080, 1920, { fit: "cover" })
-            .jpeg({ quality: 80 })
+            .webp({ quality: 70 })
             .toBuffer();
           return {
             ...file,
             buffer,
-            mimetype: "image/jpeg",
+            mimetype: "image/webp",
           };
         })
       );
