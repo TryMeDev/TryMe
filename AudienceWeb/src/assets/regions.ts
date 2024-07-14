@@ -31,5 +31,11 @@ export const regions = {
       "TW-XIN": "新北市",
       "TW-LIAN": "連江縣",
     },
+    MO: {
+      name: "Macau",
+      divisions: {
+        "MO-MO": "澳門",
+      },
+    },
   },
 };
