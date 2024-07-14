@@ -32,6 +32,12 @@ export const regions = {
       "TW-LIAN": "連江縣",
     },
   },
+  MO: {
+    name: "Macau",
+    divisions: {
+      "MO-MO": "澳門",
+    },
+  },
 };
 export const divisions = [
   "HK-HK",
@@ -57,4 +63,5 @@ export const divisions = [
   "TW-JIN",
   "TW-XIN",
   "TW-LIAN",
+  "MO-MO",
 ];

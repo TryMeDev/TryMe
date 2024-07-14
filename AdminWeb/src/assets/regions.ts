@@ -37,4 +37,10 @@ export const regions: {
       "TW-LIAN": "連江縣",
     },
   },
+  MO: {
+    name: "Macau",
+    divisions: {
+      "MO-MO": "澳門",
+    },
+  },
 };
