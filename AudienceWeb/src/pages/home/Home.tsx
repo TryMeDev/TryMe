@@ -9,9 +9,12 @@ import NotFound from "./NotFound";
 import ImageSlider from "./ImageSlider";
 import Slider from "react-slick";
 import TopButtons from "./TopButtons";
+import useIsStandalone from "../../hooks/useIsStandalone";
+import PromptInstallPWAPage from "../installPWA/PromptInstallPWAPage";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
+  const isStandalone = useIsStandalone();
 
   const preference = useAppSelector((state) => state.preference);
   const { t } = useTranslation();
@@ -41,50 +44,56 @@ const Home: React.FC = () => {
     }
   }, [preference.isSet]);
 
-  return isGetIdsError ? (
-    <Error
-      onReload={() => {
-        reGetIds();
-      }}
-      errorText={t("home.getIdsError")}
-    />
-  ) : !isGetIdsLoading && adIds?.length === 0 ? (
-    <NotFound isSearch={isSearch} />
-  ) : (
-    <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
-      <LoadingScreen isLoading={isGetIdsLoading} />
-      <div className="h-full w-full flex flex-col bg-black">
-        <Slider
-          touchThreshold={20}
-          adaptiveHeight
-          infinite={false}
-          vertical
-          verticalSwiping
-          beforeChange={(currentPage, newPage) => {
-            setCurrentPage(newPage);
-          }}
-        >
-          {adIds?.map((adId) => (
-            <ImageSlider
-              key={adId}
-              adId={adId}
-              isShown={currentAdId === adId}
-              addAd={(newAd: ad) => {
-                setAds((prev) => ({ ...prev, [newAd._id]: newAd }));
-              }}
-            />
-          ))}
-        </Slider>
+  return isStandalone === "unknown" ? (
+    <></>
+  ) : isStandalone ? (
+    isGetIdsError ? (
+      <Error
+        onReload={() => {
+          reGetIds();
+        }}
+        errorText={t("home.getIdsError")}
+      />
+    ) : !isGetIdsLoading && adIds?.length === 0 ? (
+      <NotFound isSearch={isSearch} />
+    ) : (
+      <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
+        <LoadingScreen isLoading={isGetIdsLoading} />
+        <div className="h-full w-full flex flex-col bg-black">
+          <Slider
+            touchThreshold={20}
+            adaptiveHeight
+            infinite={false}
+            vertical
+            verticalSwiping
+            beforeChange={(currentPage, newPage) => {
+              setCurrentPage(newPage);
+            }}
+          >
+            {adIds?.map((adId) => (
+              <ImageSlider
+                key={adId}
+                adId={adId}
+                isShown={currentAdId === adId}
+                addAd={(newAd: ad) => {
+                  setAds((prev) => ({ ...prev, [newAd._id]: newAd }));
+                }}
+              />
+            ))}
+          </Slider>
 
-        {currentAdId && currentAdId in ads && (
-          <TopButtons
-            currentAd={ads[currentAdId]}
-            currentAdId={currentAdId}
-            isSearch={isSearch}
-          />
-        )}
+          {currentAdId && currentAdId in ads && (
+            <TopButtons
+              currentAd={ads[currentAdId]}
+              currentAdId={currentAdId}
+              isSearch={isSearch}
+            />
+          )}
+        </div>
       </div>
-    </div>
+    )
+  ) : (
+    <PromptInstallPWAPage />
   );
 };
 

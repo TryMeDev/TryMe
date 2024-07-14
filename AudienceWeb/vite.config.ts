@@ -7,7 +7,7 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
   includeAssets: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
   manifest: {
     name: "TryMe",
-    short_name: "tryme",
+    short_name: "TryMe",
     description: "Try Me!",
     theme_color: "#000000",
     background_color: "#000000",

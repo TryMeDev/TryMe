@@ -25,6 +25,8 @@ import { Dropdown } from "primereact/dropdown";
 import { langs } from "../../assets/langs";
 import { useAppDispatch } from "../../app/store";
 import { PUBLISHER_URL } from "../../config";
+import useIsStandalone from "../../hooks/useIsStandalone";
+import PromptInstallPWAPage from "../installPWA/PromptInstallPWAPage";
 
 export type division = {
   label: string;
@@ -48,6 +50,7 @@ const regionDataList: region[] = Object.entries(regions).map(
 
 const Settings: React.FC = () => {
   const dispatch = useAppDispatch();
+  const isStandalone = useIsStandalone();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -83,7 +86,9 @@ const Settings: React.FC = () => {
     ...langs[code as keyof typeof langs],
   }));
 
-  return (
+  return isStandalone === "unknown" ? (
+    <></>
+  ) : isStandalone ? (
     <div className="h-full w-full">
       {isCatsError ? (
         <Error
@@ -237,6 +242,8 @@ const Settings: React.FC = () => {
         </>
       )}
     </div>
+  ) : (
+    <PromptInstallPWAPage />
   );
 };
 

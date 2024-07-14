@@ -97,7 +97,6 @@ const Search: React.FC = () => {
                     setSuggestions(newSuggestions);
                   }
                 }}
-                dropdown
                 multiple
               />
             </div>

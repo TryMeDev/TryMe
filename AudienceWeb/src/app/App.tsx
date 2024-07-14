@@ -1,36 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import router from "./router";
 import { PrimeReactProvider } from "primereact/api";
 import { IndexedDBProvider } from "./IndexedDBContext";
 import { useAppDispatch } from "./store";
 import { getFromStorage } from "../slices/preferenceSlice";
-import PromptInstallPWAPage from "./PromptInstallPWAPage";
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [isStandalone, setIsStandalone] = useState<false | true | "unknown">(
-    "unknown"
-  );
-
-  useEffect(() => {
-    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
-  }, []);
 
   useEffect(() => {
     dispatch(getFromStorage({}));
   }, []);
 
-  return isStandalone === "unknown" ? (
-    <></>
-  ) : isStandalone ? (
+  return (
     <IndexedDBProvider databaseName="tryme" storeName="bookmarks">
       <PrimeReactProvider>
         <RouterProvider router={router} />
       </PrimeReactProvider>
     </IndexedDBProvider>
-  ) : (
-    <PromptInstallPWAPage />
   );
 };
 
