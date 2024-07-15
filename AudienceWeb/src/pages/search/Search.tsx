@@ -43,7 +43,7 @@ const Search: React.FC = () => {
       ) : (
         <>
           <div
-            className="w-full p-3 flex justify-between"
+            className="w-full p-3"
             style={{
               backgroundColor: "var(--primary-color)",
               color: "var(--primary-color-text)",
@@ -60,20 +60,12 @@ const Search: React.FC = () => {
               />
               <h2>{t("search.search")}</h2>
             </div>
-            <Button
-              disabled={preference.searchingTags.length === 0}
-              className="p-0"
-              icon="pi pi-search"
-              onClick={() => {
-                navigate("/");
-              }}
-            />
           </div>
 
           <div className="w-full h-full p-2">
             <LoadingScreen isLoading={isTagsLoading} />
 
-            <div>
+            <div className="flex flex-col gap-2">
               <label>{t("search.hint")}</label>
               <AutoComplete
                 className="w-full"
@@ -100,6 +92,15 @@ const Search: React.FC = () => {
                 multiple
               />
             </div>
+
+            <Button
+              className="w-full"
+              disabled={preference.searchingTags.length === 0}
+              label={t("search.search")}
+              onClick={() => {
+                navigate("/");
+              }}
+            />
           </div>
         </>
       )}

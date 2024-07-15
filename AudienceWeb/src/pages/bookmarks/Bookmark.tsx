@@ -25,6 +25,7 @@ const Bookmark: React.FC<{
           <Button
             icon="pi pi-chevron-left"
             text
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={(e) => {
               e.stopPropagation();
               onBack();
@@ -37,6 +38,7 @@ const Bookmark: React.FC<{
                 icon="pi pi-share-alt"
                 className="bg-opacity-10 bg-black"
                 text
+                pt={{ icon: { className: "text-gray-100" } }}
                 rounded
                 onClick={(e) => {
                   e.stopPropagation();
@@ -51,6 +53,7 @@ const Bookmark: React.FC<{
               <Button
                 icon="pi pi-bookmark-fill"
                 text
+                pt={{ icon: { className: "text-gray-100" } }}
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete();

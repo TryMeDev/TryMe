@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "primereact/button";
 import { IndexedDBContext } from "../../app/IndexedDBContext";
 import { Toast } from "primereact/toast";
+import useIsStandalone from "../../hooks/useIsStandalone";
 
 const TopButtons: React.FC<{
   currentAd?: ad;
   currentAdId?: string;
 }> = ({ currentAd, currentAdId }) => {
   const navigate = useNavigate();
+  const isStandalone = useIsStandalone();
   const toast = useRef<Toast>(null);
 
   const indexedDBContext = useContext(IndexedDBContext);
@@ -33,12 +35,14 @@ const TopButtons: React.FC<{
         className="bg-opacity-10 bg-black"
         text
         rounded
+        pt={{ icon: { className: "text-gray-100" } }}
         onClick={() => {
           navigate("/");
         }}
       />
 
-      {currentAd &&
+      {isStandalone &&
+        currentAd &&
         currentAdId &&
         (bookmarkIds?.includes(currentAdId) ? (
           <Button
@@ -46,6 +50,7 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={() => {
               deleteBookmark(currentAdId);
             }}
@@ -56,6 +61,7 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={() => {
               addBookmark(currentAd);
             }}

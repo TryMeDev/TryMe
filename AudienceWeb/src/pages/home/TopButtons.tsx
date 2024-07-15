@@ -37,6 +37,7 @@ const TopButtons: React.FC<{
           className="bg-opacity-10 bg-black"
           text
           rounded
+          pt={{ icon: { className: "text-gray-100" } }}
           onClick={(e) => {
             e.stopPropagation();
             navigate("search");
@@ -49,6 +50,7 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={(e) => {
               e.stopPropagation();
               navigate("settings");
@@ -59,6 +61,7 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={(e) => {
               e.stopPropagation();
               navigate("bookmarks");
@@ -73,6 +76,7 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={(e) => {
               e.stopPropagation();
               navigator.clipboard.writeText(`${LOCAL_URL}${currentAdId}`);
@@ -92,6 +96,7 @@ const TopButtons: React.FC<{
               className="bg-opacity-10 bg-black"
               text
               rounded
+              pt={{ icon: { className: "text-gray-100" } }}
               onClick={(e) => {
                 e.stopPropagation();
                 deleteBookmark(currentAdId);
@@ -103,6 +108,7 @@ const TopButtons: React.FC<{
               className="bg-opacity-10 bg-black"
               text
               rounded
+              pt={{ icon: { className: "text-gray-100" } }}
               onClick={(e) => {
                 e.stopPropagation();
                 addBookmark(currentAd);
@@ -115,6 +121,7 @@ const TopButtons: React.FC<{
             className="bg-opacity-10 bg-black"
             text
             rounded
+            pt={{ icon: { className: "text-gray-100" } }}
             onClick={(e) => {
               e.stopPropagation();
               navigate("search");

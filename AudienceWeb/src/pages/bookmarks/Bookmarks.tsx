@@ -8,6 +8,7 @@ import Bookmark from "./Bookmark";
 import { IndexedDBContext } from "../../app/IndexedDBContext";
 import { Checkbox } from "primereact/checkbox";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { ToggleButton } from "primereact/togglebutton";
 
 const Bookmarks: React.FC = () => {
   const { t } = useTranslation();
@@ -94,8 +95,12 @@ const Bookmarks: React.FC = () => {
               if (bookmark?.imgs.length > 0) {
                 return (
                   <div className="w-[48%]" key={bookmark._id}>
-                    <Checkbox
+                    <ToggleButton
                       className="absolute"
+                      onLabel=""
+                      offLabel=""
+                      onIcon="pi pi-check"
+                      offIcon="pi"
                       checked={
                         bookmark._id !== undefined &&
                         selectedBookmarkIds.includes(bookmark._id)
@@ -103,7 +108,7 @@ const Bookmarks: React.FC = () => {
                       onChange={(e) => {
                         const bookmarkId = bookmark?._id;
                         if (bookmarkId) {
-                          if (e.checked) {
+                          if (e.value) {
                             setSelectedBookmarkIds((prev) => [
                               ...prev,
                               bookmarkId,
