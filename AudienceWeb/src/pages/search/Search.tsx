@@ -65,7 +65,7 @@ const Search: React.FC = () => {
           <div className="w-full h-full p-2">
             <LoadingScreen isLoading={isTagsLoading} />
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col">
               <label>{t("search.hint")}</label>
               <AutoComplete
                 className="w-full"
@@ -94,7 +94,7 @@ const Search: React.FC = () => {
             </div>
 
             <Button
-              className="w-full"
+              className="mt-2 w-full"
               disabled={preference.searchingTags.length === 0}
               label={t("search.search")}
               onClick={() => {
