@@ -56,7 +56,9 @@ router.post("/getbyid", async (req: Request, res: Response) => {
         is18: convertedAd.is18,
       });
     }
-    return res.status(404).json({ msg: "Not Found" });
+    return res.status(404).json({
+      msg: "The post is not found. It may be deleted by the publisher.",
+    });
   } catch (error) {
     console.log(JSON.stringify(error));
     return res.status(500).json("error");
@@ -150,7 +152,7 @@ router.get("/profile", auth, async (req: Request, res: Response) => {
     const email = res.locals.email;
     const user = await User.findOne({ email }).lean();
     if (!user) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "User does not exist" });
     }
     const ads = await Ad.find(
       {
@@ -237,7 +239,7 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "User does not exist" });
     }
 
     const {
@@ -268,7 +270,9 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
           }))
       )
     ) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res
+        .status(400)
+        .json({ msg: "Time conflict wih other post with same location" });
     }
 
     const ad = await Ad.create({
@@ -303,21 +307,23 @@ router.put("/pay", auth, async (req: Request, res: Response) => {
     const user = await User.findOne({ email }).lean();
 
     if (!user) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "User does not exist" });
     }
 
     const { adId } = req.body;
     if (!user.adIds.map((id) => id.toString()).includes(adId)) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "Post is not found in user profile" });
     }
 
     const ad = await Ad.findById(adId);
 
     if (!ad) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "Post is not found" });
     }
     if (ad.status !== "unpaid") {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({
+        msg: "Post is not unpaid. It may be paid or changed to other statuses.",
+      });
     }
 
     const session = await createPaymentSession(ad, user.email);
@@ -355,6 +361,7 @@ router.put("/", auth, async (req: Request, res: Response) => {
     } = req.body;
 
     const ad = await Ad.findById(adId);
+
     if (ad) {
       if (ad.status === "unpaid" && status === "rejected") {
       } else if (ad.status === "paid" && status === "approved") {
@@ -363,7 +370,9 @@ router.put("/", auth, async (req: Request, res: Response) => {
         await cancelPayment(ad.stripe_payment_id);
       } else if (ad.status === "approved" && status === "canceled") {
       } else if (status !== ad.status) {
-        return res.status(400).json({ msg: "Bad Request" });
+        return res
+          .status(400)
+          .json({ msg: `Cannot update from ${ad.status} to ${status}` });
       }
 
       ad.catIds = catIds.map((id) => new mongoose.Types.ObjectId(id));
@@ -386,7 +395,7 @@ router.put("/", auth, async (req: Request, res: Response) => {
       return res.status(200).json({ _id: ad._id });
     }
 
-    return res.status(404).json({ msg: "Not Found" });
+    return res.status(404).json({ msg: "Post is not found" });
   } catch (error) {
     console.log(JSON.stringify(error));
     return res.status(500).json("error");
@@ -406,13 +415,13 @@ router.put("/cancel", auth, async (req: Request, res: Response) => {
     } = req.body;
 
     if (!user) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "User not found" });
     }
 
     const ad = await Ad.findById(adId);
 
     if (!ad) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "Post not found" });
     }
 
     if (!user.adIds.some((id) => id.toString() === adId)) {
@@ -427,7 +436,9 @@ router.put("/cancel", auth, async (req: Request, res: Response) => {
       ad.status = "canceled";
       await ad.save();
     } else {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res
+        .status(400)
+        .json({ msg: `${ad.status} post cannot be canceled` });
     }
 
     return res.status(200).json({ _id: ad._id });
@@ -450,13 +461,13 @@ router.delete("/", auth, async (req: Request, res: Response) => {
     } = req.body;
 
     if (!user) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "User not found" });
     }
 
     const ad = await Ad.findById(adId);
 
     if (!ad) {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res.status(400).json({ msg: "Post not found" });
     }
 
     if (!user.adIds.some((id) => id.toString() === adId)) {
@@ -473,7 +484,11 @@ router.delete("/", auth, async (req: Request, res: Response) => {
       await user.save();
       await Ad.findByIdAndDelete(adId);
     } else {
-      return res.status(400).json({ msg: "Bad Request" });
+      return res
+        .status(400)
+        .json({
+          msg: `${ad.status} post cannot be deleted. Approved post can only be deleted after the posting date`,
+        });
     }
 
     return res.status(200).json({ _id: ad._id });
