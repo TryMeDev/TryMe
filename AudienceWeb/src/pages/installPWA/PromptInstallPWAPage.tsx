@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { PUBLISHER_URL } from "../../config";
 
 type Platform = "windows" | "mac" | "ios" | "android" | "unknown";
 
@@ -138,6 +139,10 @@ const PromptInstallPWAPage: React.FC = () => {
       ],
     },
   };
+  const publisherLink = {
+    zh: "創作者請按這裏",
+    en: "Click here if you are a creator",
+  };
 
   const currentInstructions = instructions[platform];
   const colors = {
@@ -167,11 +172,42 @@ const PromptInstallPWAPage: React.FC = () => {
           </span>
         </h1>
         <ul className="space-y-6">
+          <li>
+            <div className="flex items-start">
+              <span
+                className="flex items-center justify-center text-white rounded-full w-8 h-8 mr-4 flex-shrink-0 text-sm font-bold"
+                style={{ backgroundColor: colors.primary }}
+              >
+                {0}
+              </span>
+              <div>
+                <a
+                  href={`${PUBLISHER_URL}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-lg mb-1"
+                  style={{ color: colors.text }}
+                >
+                  {publisherLink.en}
+                </a>
+                <a
+                  href={`${PUBLISHER_URL}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline text-sm"
+                  style={{ color: colors.lightText }}
+                >
+                  {publisherLink.zh}
+                </a>
+              </div>
+            </div>
+          </li>
+
           {currentInstructions.steps.map((step, index) => (
             <li
               key={index}
               className="fade-in"
-              style={{ animationDelay: `${index * 150}ms` }}
+              style={{ animationDelay: `${(index + 1) * 150}ms` }}
             >
               <div className="flex items-start">
                 <span
