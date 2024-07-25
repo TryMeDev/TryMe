@@ -185,7 +185,7 @@ const PromptInstallPWAPage: React.FC = () => {
                   href={`${PUBLISHER_URL}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-lg mb-1"
+                  className="underline text-lg mb-1 block"
                   style={{ color: colors.text }}
                 >
                   {publisherLink.en}
@@ -194,7 +194,7 @@ const PromptInstallPWAPage: React.FC = () => {
                   href={`${PUBLISHER_URL}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline text-sm"
+                  className="underline text-sm block"
                   style={{ color: colors.lightText }}
                 >
                   {publisherLink.zh}
