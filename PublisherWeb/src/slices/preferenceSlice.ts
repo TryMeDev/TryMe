@@ -4,7 +4,7 @@ import i18next from "i18next";
 type preferenceState = { lang: string };
 
 const preferenceInitialState: preferenceState = {
-  lang: i18next.resolvedLanguage || "",
+  lang: i18next.resolvedLanguage ?? "",
 };
 
 export const preferenceSlice = createSlice({

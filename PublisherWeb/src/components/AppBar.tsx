@@ -58,7 +58,7 @@ const AppBar: React.FC<{ children?: React.ReactNode; canLogout?: boolean }> = ({
           trigger: { className: "w-auto pr-1 h-auto" },
           input: { className: "px-1 py-2" },
         }}
-        value={langList?.find((lang) => lang.code === preference.lang) || ""}
+        value={langList?.find((lang) => lang.code === preference.lang) ?? ""}
         onChange={(e) => {
           dispatch(setLang({ lang: e.value.code }));
         }}

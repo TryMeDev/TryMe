@@ -52,7 +52,7 @@ const NotFound: React.FC<{ isSearch: boolean }> = ({ isSearch }) => {
         )}
       </div>
 
-      <div className="flex flex-grow justify-center items-center p-2">
+      <div className="flex flex-grow justify-center items-center p-4">
         <h3 className="text-center">
           {t(isSearch ? "home.noSearchResult" : "home.noRecommendations")}
         </h3>
