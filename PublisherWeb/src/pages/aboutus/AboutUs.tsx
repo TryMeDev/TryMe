@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import AppBar from "../../components/AppBar";
+import { CUSTOMER_URL } from "../../config";
 
 const AboutUs = () => {
   const { t } = useTranslation();
@@ -25,6 +26,10 @@ const AboutUs = () => {
         <h2 className="text-2xl mt-3">{t("aboutUs.heading5")}</h2>
         <p>{t("aboutUs.paragraph5")}</p>
         <p>{t("aboutUs.paragraph5Email")}</p>
+
+        <a className="underline" href={CUSTOMER_URL}>
+          {t("browse")}
+        </a>
       </div>
     </div>
   );

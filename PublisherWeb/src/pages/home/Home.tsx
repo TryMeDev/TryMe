@@ -12,6 +12,7 @@ import LoadingImage from "../../components/LoadingImage";
 import { displayDate, sortByDate } from "../../assets/utils";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
+import { CUSTOMER_URL } from "../../config";
 
 const Home: React.FC = () => {
   const toast = useRef<Toast>(null);
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
       <div className="w-full h-full flex flex-col">
         <AppBar />
         <Toast ref={toast} />
-        <div className="flex-grow overflow-auto">
+        <div className="flex-grow overflow-auto flex flex-col justify-between">
           <DataScroller
             value={profile ? sortByDate(profile, "startDate", false) : []}
             itemTemplate={(ad: ad) => (
@@ -79,7 +80,7 @@ const Home: React.FC = () => {
                     <span className="overflow-clip">{`${displayDate(
                       new Date(ad.startDate)
                     )} - ${displayDate(new Date(ad.endDate))}`}</span>
-                    <span>{ad.status}</span>
+                    <span>{t(`status.${ad?.status}`)}</span>
                   </div>
                   <div className="overflow-clip flex gap-2">
                     {cats &&
@@ -117,6 +118,12 @@ const Home: React.FC = () => {
             rows={10}
             emptyMessage={t("home.noAds")}
           />
+
+          <div className="w-full flex justify-center">
+            <a className="underline" href={CUSTOMER_URL}>
+              {t("browse")}
+            </a>
+          </div>
         </div>
       </div>
     </>

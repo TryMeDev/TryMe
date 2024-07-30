@@ -27,6 +27,7 @@ i18n
     resources: {
       en: {
         translation: {
+          browse: "I wanna browse for posts",
           privacyPolicy: "Privacy Policy",
           termsOfService: "Terms of Service",
           login: {
@@ -215,6 +216,7 @@ i18n
       },
       "zh-TW": {
         translation: {
+          browse: "我想瀏覽帖子",
           privacyPolicy: "隱私權政策",
           termsOfService: "條款及細則",
           login: {

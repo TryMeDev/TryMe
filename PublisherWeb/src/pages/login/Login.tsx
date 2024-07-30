@@ -3,7 +3,7 @@ import { useLoginMutation } from "../../slices/authSlice";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { Toast } from "primereact/toast";
 import LoadingScreen from "../../components/LoadingScreen";
-import { GOOGLE_CLIENT_ID } from "../../config";
+import { CUSTOMER_URL, GOOGLE_CLIENT_ID } from "../../config";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AppBar from "../../components/AppBar";
@@ -82,6 +82,13 @@ const Login = () => {
                   {t("privacyPolicy")}
                 </a>
               </div>
+
+              <a
+                className="underline text-gray-700 text-sm"
+                href={CUSTOMER_URL}
+              >
+                {t("browse")}
+              </a>
             </div>
           </div>
 

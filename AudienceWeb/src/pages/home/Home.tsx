@@ -30,7 +30,7 @@ const Home: React.FC = () => {
     isLoading: isGetIdsLoading,
     refetch: reGetIds,
   } = useGetIdsQuery({
-    excludedCatIds: preference.notInterestedCats,
+    excludedCatIds: isSearch ? [] : preference.notInterestedCats,
     is18: preference.is18,
     locations: [preference.location],
     tags: preference?.searchingTags || [],
