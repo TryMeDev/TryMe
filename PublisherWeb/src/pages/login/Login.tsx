@@ -98,7 +98,13 @@ const Login = () => {
                 {t("login.iamcustomer")}
               </h2>
               <div className="flex justify-center">
-                <Button text className="p-0" label={t("login.customerlink")} />
+                <a href={CUSTOMER_URL}>
+                  <Button
+                    text
+                    className="p-0"
+                    label={t("login.customerlink")}
+                  />
+                </a>
               </div>
             </Card>
           </div>
