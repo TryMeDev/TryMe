@@ -31,6 +31,9 @@ i18n
           privacyPolicy: "Privacy Policy",
           termsOfService: "Terms of Service",
           login: {
+            iamcustomer: "I wanna browse post",
+            iampublisher: "I wanna post post",
+            customerlink: "Please download the customer app here",
             failedSummary: "Login Fails",
             failedDetail: "Please check if the email address is valid",
             logout: "Logout",
@@ -220,6 +223,9 @@ i18n
           privacyPolicy: "隱私權政策",
           termsOfService: "條款及細則",
           login: {
+            iamcustomer: "我想瀏覽帖子",
+            iampublisher: "我想發佈帖子",
+            customerlink: "請移步下載顧客APP",
             failedSummary: "登入失敗",
             failedDetail: "請檢查電子郵件地址是否有效",
             logout: "登出",
