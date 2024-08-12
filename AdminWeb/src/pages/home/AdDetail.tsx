@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAppSelector } from "../../app/store";
-import { useGetCatsQuery } from "../../slices/catSlice";
+import { cat, useGetCatsQuery } from "../../slices/catSlice";
 import { Button } from "primereact/button";
 import { ad, status, useUpdateAdMutation } from "../../slices/adsSlice";
 import { useTranslation } from "react-i18next";
@@ -18,8 +18,7 @@ import { InputSwitch } from "primereact/inputswitch";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { statusMatrix } from "../../assets/utils";
 import { Toast } from "primereact/toast";
-
-type formattedCat = { _id: string; label: string };
+import { InputText } from "primereact/inputtext";
 
 const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
   const toast = useRef<Toast>(null);
@@ -36,26 +35,16 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
   const { t } = useTranslation();
 
   const [imgN, setImgN] = useState<number>(0);
-  const [selectedCats, setSelectedCats] = useState<formattedCat[]>([]);
-  const [filteredCats, setFilteredCats] = useState<formattedCat[]>([]);
+  const [selectedCat, setSelectedCat] = useState<cat>();
   const [tags, setTags] = useState<string[]>([]);
   const [statusDescription, setStatusDescription] = useState<string>("");
   const [is18, setIs18] = useState<boolean>(false);
   const [status, setStatus] = useState<status>("unpaid");
-
-  const formattedCats: formattedCat[] =
-    cats?.map((cat) => ({ _id: cat._id, label: cat.display[lang] })) || [];
+  const [links, setLinks] = useState<string[]>([]);
 
   useEffect(() => {
-    if (ad?.catIds && cats) {
-      setSelectedCats(
-        ad.catIds
-          .map((catId) => {
-            const cat = cats?.find((cat) => cat._id === catId);
-            return cat ? { _id: cat._id, label: cat.display[lang] } : undefined;
-          })
-          .filter((cat) => cat !== undefined) as formattedCat[]
-      );
+    if (ad?.catId && cats) {
+      setSelectedCat(cats?.find((cat) => cat._id === ad.catId));
     }
   }, [ad, cats]);
 
@@ -66,6 +55,7 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
       setTags(ad.tags);
       setStatusDescription(ad.statusDescription);
       setIs18(ad.is18);
+      setLinks(ad.links);
     }
   }, [ad]);
 
@@ -115,7 +105,7 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
             endDate: new Date(ad?.endDate).toLocaleDateString(),
           })}
         </div>
-        {ad?.links.map((link, idx) => (
+        {ad?.links?.map((link, idx) => (
           <a
             href={link}
             target="_blank"
@@ -142,20 +132,28 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
         </div>
 
         <div className="w-full">
+          {links?.map((link, idx) => (
+            <InputText
+              value={link}
+              onChange={(e) => {
+                setLinks((prev) => [
+                  ...prev.slice(0, idx),
+                  e.target.value,
+                  ...prev.slice(idx + 1),
+                ]);
+              }}
+              key={idx}
+            />
+          ))}
+        </div>
+
+        <div className="w-full mt-2">
           <label>{t("category")}</label>
-          <AutoComplete
-            field="label"
-            value={selectedCats}
-            suggestions={filteredCats}
-            completeMethod={(e: AutoCompleteCompleteEvent) => {
-              setFilteredCats(
-                formattedCats?.filter((cat) => cat.label.includes(e.query)) ||
-                  []
-              );
-            }}
-            onChange={(e: AutoCompleteChangeEvent) => setSelectedCats(e.value)}
-            dropdown
-            multiple
+          <Dropdown
+            optionLabel={`display.${lang}`}
+            options={cats}
+            value={selectedCat}
+            onChange={(e: AutoCompleteChangeEvent) => setSelectedCat(e.value)}
           />
         </div>
 
@@ -200,15 +198,19 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
               header: t("confirmHeader"),
               icon: "pi pi-exclamation-triangle",
               defaultFocus: "accept",
-              accept: () =>
-                updateAd({
-                  adId: ad?._id,
-                  catIds: selectedCats.map((cat) => cat._id),
-                  tags,
-                  status,
-                  statusDescription,
-                  is18,
-                }),
+              accept: () => {
+                if (selectedCat?._id) {
+                  updateAd({
+                    links,
+                    adId: ad._id,
+                    catId: selectedCat?._id,
+                    tags,
+                    status,
+                    statusDescription,
+                    is18,
+                  });
+                }
+              },
               reject: () => {},
             });
           }}

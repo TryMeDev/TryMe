@@ -95,6 +95,8 @@ i18n
               setInformation: "Set Information",
             },
             setInfo: {
+              cat: "Category",
+              tags: "Tags (Press Enter or , to add)",
               locations: "Locations",
               startDate: "Start Date",
               endDate: "End Date",
@@ -285,6 +287,8 @@ i18n
               setInformation: "設定資訊",
             },
             setInfo: {
+              cat: "類別",
+              tags: "標簽（按Enter添加））",
               locations: "地區",
               startDate: "開始日期",
               endDate: "結束日期",

@@ -36,9 +36,9 @@ const adSchema = new Schema({
     type: [String],
     default: [],
   },
-  catIds: {
-    type: [Schema.Types.ObjectId],
-    default: [],
+  catId: {
+    type: Schema.Types.ObjectId,
+    required: true,
   },
   statusDescription: {
     type: String,
@@ -64,9 +64,7 @@ adSchema.index({
   endDate: 1,
   tags: 1,
   status: 1,
-});
-adSchema.index({
-  catIds: 1,
+  catId: 1,
 });
 adSchema.index({
   locations: 1,

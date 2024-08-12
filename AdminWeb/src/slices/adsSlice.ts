@@ -8,7 +8,7 @@ export type ad = {
   startDate: string;
   endDate: string;
   locations: string[];
-  catIds: string[];
+  catId: string;
   status: status;
   tags: string[];
   explosure: number;
@@ -45,17 +45,26 @@ const adsSlice = apiSlice.injectEndpoints({
       AdResponse,
       {
         adId: string;
-        catIds: string[];
+        links: string[];
+        catId: string;
         tags: string[];
         status: string;
         statusDescription: string;
         is18: boolean;
       }
     >({
-      query: ({ adId, catIds, tags, status, statusDescription, is18 }) => ({
+      query: ({
+        adId,
+        catId,
+        tags,
+        status,
+        statusDescription,
+        is18,
+        links,
+      }) => ({
         url: "ad/",
         method: "PUT",
-        body: { adId, catIds, tags, status, statusDescription, is18 },
+        body: { adId, catId, tags, status, statusDescription, is18, links },
       }),
     }),
   }),

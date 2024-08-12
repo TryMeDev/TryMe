@@ -5,18 +5,18 @@ type preferenceState = {
   lang: string;
   location: string;
   is18: boolean;
-  notInterestedCats: string[];
   isSet: boolean;
   searchingTags: string[];
+  currentCat: string;
 };
 
 const preferenceInitialState: preferenceState = {
   lang: i18next.resolvedLanguage || "en",
   location: "HK-KLN",
   is18: false,
-  notInterestedCats: [],
   isSet: true,
   searchingTags: [],
+  currentCat: "",
 };
 
 export const preferenceSlice = createSlice({
@@ -27,22 +27,18 @@ export const preferenceSlice = createSlice({
       const lang = localStorage.getItem("lang");
       const location = localStorage.getItem("location");
       const is18 = localStorage.getItem("is18");
-      const notInterestedCats = localStorage.getItem("notInterestedCats");
 
-      if (
-        location === null ||
-        is18 === null ||
-        notInterestedCats === null ||
-        lang === null
-      ) {
+      if (location === null || is18 === null || lang === null) {
         state.isSet = false;
       } else {
         state.lang = lang;
         i18next.changeLanguage(lang);
         state.location = location;
         state.is18 = is18 === "true";
-        state.notInterestedCats = JSON.parse(notInterestedCats);
       }
+
+      const currentCat = localStorage.getItem("currentCat");
+      state.currentCat = currentCat ?? "";
     },
     setLang: (
       state: preferenceState,
@@ -66,23 +62,17 @@ export const preferenceSlice = createSlice({
       state.is18 = is18;
       state.isSet = true;
     },
-    setNotInterestedCats: (
+    setCurrentCat: (
       state: preferenceState,
-      {
-        payload: { notInterestedCats },
-      }: PayloadAction<{ notInterestedCats: string[] }>
+      { payload: { cat } }: PayloadAction<{ cat: string }>
     ) => {
-      state.notInterestedCats = notInterestedCats;
-      state.isSet = true;
+      state.currentCat = cat;
+      localStorage.setItem("currentCat", cat);
     },
     saveLocalStorage: (state: preferenceState) => {
       localStorage.setItem("lang", state.lang);
       localStorage.setItem("location", state.location);
       localStorage.setItem("is18", state.is18 ? "true" : "false");
-      localStorage.setItem(
-        "notInterestedCats",
-        JSON.stringify(state.notInterestedCats)
-      );
       state.isSet = true;
     },
     setSearchingTags: (
@@ -99,8 +89,8 @@ export const {
   getFromStorage,
   setIs18,
   setLocation,
-  setNotInterestedCats,
   saveLocalStorage,
   setSearchingTags,
+  setCurrentCat,
 } = preferenceSlice.actions;
 export default preferenceSlice.reducer;

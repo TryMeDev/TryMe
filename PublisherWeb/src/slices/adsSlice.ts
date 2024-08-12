@@ -10,7 +10,7 @@ export type ad = {
   startDate: string;
   endDate: string;
   locations: string[];
-  catIds: string[];
+  catId: string;
   status: status;
   tags: string[];
   explosure: number;
@@ -31,20 +31,22 @@ const adsSlice = apiSlice.injectEndpoints({
       {},
       {
         imgs: File2[];
+        catId: string;
+        tags: string[];
         links: string[];
         startDate: Date;
         endDate: Date;
         locations: string[];
       }
     >({
-      query: ({ imgs, links, startDate, endDate, locations }) => {
+      query: ({ imgs, catId, tags, links, startDate, endDate, locations }) => {
         const formData = new FormData();
         for (const img of imgs) {
           formData.append("images", img);
         }
         formData.append(
           "data",
-          JSON.stringify({ links, startDate, endDate, locations })
+          JSON.stringify({ catId, tags, links, startDate, endDate, locations })
         );
 
         return {

@@ -57,7 +57,7 @@ router.post("/getbyid", async (req: Request, res: Response) => {
       });
     }
     return res.status(404).json({
-      msg: "The post is not found. It may be deleted by the publisher.",
+      msg: "The post is not found. It may be deleted.",
     });
   } catch (error) {
     console.log(JSON.stringify(error));
@@ -68,10 +68,10 @@ router.post("/getbyid", async (req: Request, res: Response) => {
 // audience browse or search
 router.post("/browse", async (req: Request, res: Response) => {
   try {
-    const { excludedCatIds, tags, locations, is18 } = req.body;
+    const { catIds, tags, locations, is18 } = req.body;
     const isBrowse = tags.length === 0;
 
-    const excludedCatObjectIds = excludedCatIds.map(
+    const catObjectIds = catIds.map(
       (stringId: string) => new mongoose.Types.ObjectId(stringId)
     );
 
@@ -81,18 +81,18 @@ router.post("/browse", async (req: Request, res: Response) => {
         searchCriteria = {
           status: "approved",
           endDate: { $gte: new Date() },
+          catId: { $in: catObjectIds },
           locations: { $in: locations },
           startDate: { $lte: new Date() },
-          catIds: { $nin: excludedCatObjectIds },
         };
       } else {
         searchCriteria = {
           status: "approved",
           is18: false,
           endDate: { $gte: new Date() },
+          catId: { $in: catObjectIds },
           locations: { $in: locations },
           startDate: { $lte: new Date() },
-          catIds: { $nin: excludedCatObjectIds },
         };
       }
     } else {
@@ -101,6 +101,7 @@ router.post("/browse", async (req: Request, res: Response) => {
           status: "approved",
           endDate: { $gte: new Date() },
           tags: { $in: tags },
+          catId: { $in: catObjectIds },
           locations: { $in: locations },
           startDate: { $lte: new Date() },
         };
@@ -110,6 +111,7 @@ router.post("/browse", async (req: Request, res: Response) => {
           is18: false,
           endDate: { $gte: new Date() },
           tags: { $in: tags },
+          catId: { $in: catObjectIds },
           locations: { $in: locations },
           startDate: { $lte: new Date() },
         };
@@ -138,7 +140,14 @@ router.post("/browse", async (req: Request, res: Response) => {
 // audience / admin autocomplete tags
 router.get("/tags", async (req: Request, res: Response) => {
   try {
-    const tags = await Tag.find({}, { _id: 0, name: 1 }).lean();
+    const { catId } = req.body;
+    const catObjectId = new mongoose.Types.ObjectId(catId);
+
+    const tags = await Tag.find(
+      { catId: catObjectId },
+      { _id: 0, name: 1, catId: 0 }
+    ).lean();
+
     return res.status(200).json(tags);
   } catch (error) {
     console.log(JSON.stringify(error));
@@ -166,7 +175,7 @@ router.get("/profile", auth, async (req: Request, res: Response) => {
         status: 1,
         locations: 1,
         tags: 1,
-        catIds: 1,
+        catId: 1,
         statusDescription: 1,
         is18: 1,
         explosure: 1,
@@ -244,11 +253,15 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
 
     const {
       links,
+      catId,
+      tags,
       startDate,
       endDate,
       locations,
     }: {
       links: string[];
+      catId: string;
+      tags: string[];
       startDate: Date;
       endDate: Date;
       locations: string[];
@@ -283,8 +296,8 @@ router.post("/", auth, uploadImages, async (req: Request, res: Response) => {
       createDate: new Date(),
       status: "unpaid",
       locations,
-      tags: [],
-      catIds: [],
+      tags: tags,
+      catId: new mongoose.Types.ObjectId(catId),
       statusDescription: "",
       is18: false,
     });
@@ -346,14 +359,16 @@ router.put("/", auth, async (req: Request, res: Response) => {
 
     const {
       adId,
-      catIds,
+      links,
+      catId,
       tags,
       status,
       statusDescription,
       is18,
     }: {
       adId: string;
-      catIds: string[];
+      links: string[];
+      catId: string;
       tags: string[];
       status: "unpaid" | "paid" | "approved" | "rejected" | "canceled";
       statusDescription: string;
@@ -375,18 +390,21 @@ router.put("/", auth, async (req: Request, res: Response) => {
           .json({ msg: `Cannot update from ${ad.status} to ${status}` });
       }
 
-      ad.catIds = catIds.map((id) => new mongoose.Types.ObjectId(id));
-      ad.tags = tags;
+      if (catId) {
+        ad.catId = new mongoose.Types.ObjectId(catId);
+      }
+      ad.links = links ?? [];
+      ad.tags = tags ?? [];
       ad.status = status;
-      ad.statusDescription = statusDescription;
-      ad.is18 = is18;
+      ad.statusDescription = statusDescription ?? "";
+      ad.is18 = is18 ?? false;
       await Promise.all([
         ad.save(),
         ...tags?.map(
           (tag) =>
             Tag.findOneAndUpdate(
-              { name: tag },
-              { name: tag },
+              { name: tag, catId: new mongoose.Types.ObjectId(catId) },
+              { name: tag, catId: new mongoose.Types.ObjectId(catId) },
               { upsert: true }
             ) || []
         ),
@@ -484,11 +502,9 @@ router.delete("/", auth, async (req: Request, res: Response) => {
       await user.save();
       await Ad.findByIdAndDelete(adId);
     } else {
-      return res
-        .status(400)
-        .json({
-          msg: `${ad.status} post cannot be deleted. Approved post can only be deleted after the posting date`,
-        });
+      return res.status(400).json({
+        msg: `${ad.status} post cannot be deleted. Approved post can only be deleted after the posting date`,
+      });
     }
 
     return res.status(200).json({ _id: ad._id });

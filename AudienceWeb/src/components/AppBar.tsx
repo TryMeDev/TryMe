@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/TryMe.png";
 import { Button } from "primereact/button";
 
 const AppBar: React.FC<{ children?: React.ReactNode }> = ({ children }) => {

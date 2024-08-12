@@ -6,9 +6,10 @@ type tagsResponse = tag[];
 
 const tagsSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getTags: builder.query<tagsResponse, {}>({
-      query: ({}) => ({
+    getTags: builder.query<tagsResponse, { catId: string }>({
+      query: ({ catId }) => ({
         url: "ad/tags/",
+        body: { catId },
       }),
     }),
   }),

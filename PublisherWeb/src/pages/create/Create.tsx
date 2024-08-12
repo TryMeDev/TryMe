@@ -10,6 +10,7 @@ import { addDays, endOfDate } from "../../assets/utils";
 import { useCreateAdMutation } from "../../slices/adsSlice";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
+import { cat, useGetCatsQuery } from "../../slices/catSlice";
 
 export type division = {
   label: string;
@@ -30,31 +31,45 @@ const Create: React.FC = () => {
     },
   ];
 
-  const { isSuccess } = useProfile();
-  const [createAd, { isLoading, isError }] = useCreateAdMutation();
+  const { isSuccess: isProfileSuccess } = useProfile();
+  const [
+    createAd,
+    { isLoading: isCreateCatLoading, isError: isCreateCatError },
+  ] = useCreateAdMutation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [imgs, setImgs] = useState<File2[]>([]);
+  const [cat, setCat] = useState<cat | undefined>();
+  const [tags, setTags] = useState<string[]>([]);
   const [links, setLinks] = useState<string[]>([]);
   const [divisions, setDivisions] = useState<division[]>([]);
   const [startDate, setStartDate] = useState<Date>(addDays(3));
   const [endDate, setEndDate] = useState<Date>(endOfDate(addDays(7)));
 
+  const {
+    data: cats,
+    isLoading: isCatsLoading,
+    isError: isCatsError,
+    error: catsError,
+  } = useGetCatsQuery({});
+
   const toast = useRef<Toast>(null);
 
   useEffect(() => {
-    if (isError) {
+    if (isCreateCatError) {
       toast.current?.show({
         severity: "error",
         summary: "Error",
         detail: t("create.payError"),
       });
     }
-  }, [isError]);
+  }, [isCreateCatError]);
 
   return (
     <div className="w-full h-full flex flex-col overflow-auto">
       <AppBar />
-      <LoadingScreen isLoading={!isSuccess || isLoading} />
+      <LoadingScreen
+        isLoading={!isProfileSuccess || isCreateCatLoading || isCatsLoading}
+      />
       <Toast ref={toast} />
 
       <div className="flex flex-col flex-grow p-4 gap-4">
@@ -86,6 +101,11 @@ const Create: React.FC = () => {
           )}
           {activeIndex === 2 && (
             <SetInfo
+              cats={cats ?? []}
+              cat={cat}
+              setCat={setCat}
+              tags={tags}
+              setTags={setTags}
               startDate={startDate}
               endDate={endDate}
               setStartDate={setStartDate}
@@ -96,15 +116,19 @@ const Create: React.FC = () => {
                 setActiveIndex(1);
               }}
               handleNext={() => {
-                createAd({
-                  imgs,
-                  links,
-                  startDate,
-                  endDate,
-                  locations: divisions.map(
-                    (division: division) => division.value
-                  ),
-                });
+                if (cat?._id) {
+                  createAd({
+                    imgs,
+                    links,
+                    catId: cat._id,
+                    tags,
+                    startDate,
+                    endDate,
+                    locations: divisions.map(
+                      (division: division) => division.value
+                    ),
+                  });
+                }
               }}
             />
           )}

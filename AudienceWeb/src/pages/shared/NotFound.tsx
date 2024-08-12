@@ -9,12 +9,7 @@ const NotFound: React.FC<{ reGetById: () => void }> = ({ reGetById }) => {
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div
-        className="w-full py-3 px-1 flex items-center"
-        style={{
-          backgroundColor: "var(--primary-color)",
-        }}
-      >
+      <div className="w-full flex items-center border-b border-gray-200">
         <Button
           icon="pi pi-home"
           className="bg-opacity-10 bg-black"
@@ -24,6 +19,7 @@ const NotFound: React.FC<{ reGetById: () => void }> = ({ reGetById }) => {
             navigate("/");
           }}
         />
+        <Button text className="p-0" label="TryMe" />
       </div>
 
       <div className="flex flex-grow justify-center items-center p-2">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { PUBLISHER_URL } from "../../config";
+import { PUBLISHER_URL } from "../config";
 
 type Platform = "windows" | "mac" | "ios" | "android" | "unknown";
 

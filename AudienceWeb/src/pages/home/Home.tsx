@@ -3,40 +3,23 @@ import { useAppSelector } from "../../app/store";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ad, useGetIdsQuery, useLazyGetByIdQuery } from "../../slices/adsSlice";
+import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
+import { useGetCatsQuery } from "../../slices/catsSlice";
 import Error from "../../components/Error";
-import NotFound from "./NotFound";
-import ImageSlider from "./ImageSlider";
-import Slider from "react-slick";
-import TopButtons from "./TopButtons";
-import useIsStandalone from "../../hooks/useIsStandalone";
-import PromptInstallPWAPage from "../installPWA/PromptInstallPWAPage";
+import Content from "./Content";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const isStandalone = useIsStandalone();
 
   const preference = useAppSelector((state) => state.preference);
   const { t } = useTranslation();
 
-  const [ads, setAds] = useState<{ [key: string]: ad }>({});
-  const [currentPage, setCurrentPage] = useState<number>(0);
-
-  const isSearch = preference?.searchingTags?.length > 0;
-
   const {
-    data: adIds,
-    isError: isGetIdsError,
-    isLoading: isGetIdsLoading,
-    refetch: reGetIds,
-  } = useGetIdsQuery({
-    excludedCatIds: isSearch ? [] : preference.notInterestedCats,
-    is18: preference.is18,
-    locations: [preference.location],
-    tags: preference?.searchingTags || [],
-  });
-
-  const currentAdId = adIds?.[currentPage];
+    data: cats,
+    isError: isCatsError,
+    isLoading: isCatsLoading,
+    refetch: reGetCats,
+  } = useGetCatsQuery({});
 
   useEffect(() => {
     if (!preference.isSet) {
@@ -44,56 +27,28 @@ const Home: React.FC = () => {
     }
   }, [preference.isSet]);
 
-  return isStandalone === "unknown" ? (
-    <></>
-  ) : isStandalone ? (
-    isGetIdsError ? (
-      <Error
-        onReload={() => {
-          reGetIds();
-        }}
-        errorText={t("home.getIdsError")}
-      />
-    ) : !isGetIdsLoading && adIds?.length === 0 ? (
-      <NotFound isSearch={isSearch} />
-    ) : (
-      <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
-        <LoadingScreen isLoading={isGetIdsLoading} />
-        <div className="h-full w-full flex flex-col bg-black">
-          <Slider
-            touchThreshold={20}
-            adaptiveHeight
-            infinite={false}
-            vertical
-            verticalSwiping
-            beforeChange={(currentPage, newPage) => {
-              setCurrentPage(newPage);
-            }}
-          >
-            {adIds?.map((adId) => (
-              <ImageSlider
-                key={adId}
-                adId={adId}
-                isShown={currentAdId === adId}
-                addAd={(newAd: ad) => {
-                  setAds((prev) => ({ ...prev, [newAd._id]: newAd }));
-                }}
-              />
-            ))}
-          </Slider>
+  useEffect(() => {
+    if (preference.currentCat !== "") {
+      navigate("/viewer");
+    }
+  }, [preference.currentCat]);
 
-          {currentAdId && currentAdId in ads && (
-            <TopButtons
-              currentAd={ads[currentAdId]}
-              currentAdId={currentAdId}
-              isSearch={isSearch}
-            />
-          )}
-        </div>
-      </div>
-    )
-  ) : (
-    <PromptInstallPWAPage />
+  return (
+    <PromptInstallIfNotStandalone>
+      {isCatsError ? (
+        <Error
+          onReload={() => {
+            reGetCats();
+          }}
+          errorText={t("getCatsError")}
+        />
+      ) : (
+        <>
+          <LoadingScreen isLoading={isCatsLoading} />
+          <Content cats={cats ?? []} />
+        </>
+      )}
+    </PromptInstallIfNotStandalone>
   );
 };
 

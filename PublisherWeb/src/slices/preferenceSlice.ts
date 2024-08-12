@@ -1,11 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import i18next from "i18next";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 type preferenceState = { lang: string };
 
 const preferenceInitialState: preferenceState = {
   lang: i18next.resolvedLanguage ?? "",
 };
+
+export const initializeLanguage = createAsyncThunk(
+  "preference/initializeLanguage",
+  async () => {
+    await i18next.init();
+    return i18next.language;
+  }
+);
 
 export const preferenceSlice = createSlice({
   name: "preference",
@@ -18,6 +27,11 @@ export const preferenceSlice = createSlice({
       state.lang = lang;
       i18next.changeLanguage(lang);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(initializeLanguage.fulfilled, (state, action) => {
+      state.lang = action.payload;
+    });
   },
 });
 

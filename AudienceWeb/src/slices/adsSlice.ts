@@ -4,7 +4,7 @@ export type ad = {
   _id: string;
   imgs: string[];
   links: string[];
-  catIds: string[];
+  catId: string;
   tags: string[];
   is18: boolean;
 };
@@ -21,16 +21,16 @@ const adsSlice = apiSlice.injectEndpoints({
     getIds: builder.query<
       string[],
       {
-        excludedCatIds: string[];
+        catIds: string[];
         tags: string[];
         locations: string[];
         is18: boolean;
       }
     >({
-      query: ({ excludedCatIds, tags, locations, is18 }) => ({
+      query: ({ catIds, tags, locations, is18 }) => ({
         url: "ad/browse/",
         method: "POST",
-        body: { excludedCatIds, tags, locations, is18 },
+        body: { catIds, tags, locations, is18 },
       }),
     }),
   }),

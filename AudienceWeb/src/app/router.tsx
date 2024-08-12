@@ -5,6 +5,7 @@ import Settings from "../pages/settings/Settings";
 import Search from "../pages/search/Search";
 import Bookmarks from "../pages/bookmarks/Bookmarks";
 import Shared from "../pages/shared/Shared";
+import Viewer from "../pages/viewer/Viewer";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { path: "bookmarks", element: <Bookmarks /> },
       { path: "search", element: <Search /> },
       { path: "settings", element: <Settings /> },
+      { path: "viewer", element: <Viewer /> },
     ],
   },
 ]);

@@ -163,21 +163,16 @@ const Detail: React.FC = () => {
 
                 {cats && (
                   <div className="text-lg overflow-clip w-full flex gap-2">
-                    {ad?.catIds.map((catId) => (
-                      <div
-                        className="flex items-center gap-1 overflow-clip"
-                        key={catId}
-                      >
-                        <i className="pi pi-tag product-category-icon"></i>
-                        <span>
-                          {
-                            cats.find((cat) => cat._id === catId)?.display?.[
-                              lang as keyof cat["display"]
-                            ]
-                          }
-                        </span>
-                      </div>
-                    ))}
+                    <div className="flex items-center gap-1 overflow-clip">
+                      <i className="pi pi-tag product-category-icon"></i>
+                      <span>
+                        {
+                          cats.find((cat) => cat._id === ad?.catId)?.display?.[
+                            lang as keyof cat["display"]
+                          ]
+                        }
+                      </span>
+                    </div>
                   </div>
                 )}
                 {ad?.tags && ad.tags.length !== 0 && (

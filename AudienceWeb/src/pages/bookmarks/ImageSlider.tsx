@@ -9,6 +9,7 @@ const ImageSlider: React.FC<{ bookmark: ad }> = ({ bookmark }) => {
       {bookmark?.imgs?.map((img, idx) => {
         return bookmark.links[idx] === "" ? (
           <Image
+            key={idx}
             src={img}
             imageClassName="h-[100svh] w-[100svw] object-contain"
           />

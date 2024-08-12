@@ -27,13 +27,14 @@ i18n
     resources: {
       en: {
         translation: {
+          home: { lookforward: "More content is coming!" },
           share: { notFound: "Sorry, the post may be removed" },
           error: {
             title: "Oops",
             message: "An unexpected error has occurred.",
             unknownError: "Unknown error",
           },
-          home: {
+          viewer: {
             noRecommendations:
               "We're sorry, we couldn't provide any recommendations for you. Please change your preferences or wait for more posts to be published.",
             noSearchResult:
@@ -75,13 +76,14 @@ i18n
       },
       "zh-TW": {
         translation: {
+          home: { lookforward: "敬請期待更多精彩内容！" },
           share: { notFound: "非常抱歉，連結的帖子可能已被移除" },
           error: {
             title: "糟糕",
             message: "發生了意外錯誤。",
             unknownError: "未知錯誤",
           },
-          home: {
+          viewer: {
             noRecommendations:
               "很抱歉，我們未能給你推薦任何帖子，請更改你的喜好或等待創作者投放更多帖子",
             noSearchResult:

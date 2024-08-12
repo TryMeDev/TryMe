@@ -11,6 +11,7 @@ import Slider from "react-slick";
 import { Card } from "primereact/card";
 import { Divider } from "primereact/divider";
 import { Button } from "primereact/button";
+import BottomBar from "../../components/BottomBar";
 
 const Login = () => {
   const [login, { isLoading, isError, isSuccess }] = useLoginMutation();
@@ -145,6 +146,8 @@ const Login = () => {
           </div>
         </Slider>
       </div>
+
+      <BottomBar />
     </div>
   );
 };
