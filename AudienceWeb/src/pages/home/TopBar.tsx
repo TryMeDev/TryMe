@@ -16,8 +16,8 @@ const TopBar: React.FC = () => {
   const { data: allBookmarks } = indexedDBContext;
 
   return (
-    <div className="w-full flex justify-between items-center border-b border-gray-200">
-      <Button text label="TryMe" />
+    <div className="w-full flex justify-between items-center">
+      <Button text label="TryMe" pt={{ label: { className: "text-xl" } }} />
       <div>
         <a href={PUBLISHER_URL}>
           <Button icon="pi pi-pen-to-square" text onClick={(e) => {}} />

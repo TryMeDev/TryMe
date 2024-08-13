@@ -11,8 +11,12 @@ const TopBar: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex items-center justify-between pr-1 border-b border-gray-200">
-      <Button text label={t("settings.settings")} />
+    <div className="w-full flex items-center justify-between pr-1">
+      <Button
+        text
+        label={t("settings.settings")}
+        pt={{ label: { className: "text-xl" } }}
+      />
       <Button
         text
         className="p-0"

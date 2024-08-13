@@ -22,7 +22,7 @@ const TopBar: React.FC<{
   const navigate = useNavigate();
 
   return (
-    <div className="w-full flex items-center justify-between border-b border-gray-200">
+    <div className="w-full flex items-center justify-between">
       <div className="flex items-center gap-1">
         <Button
           text
@@ -31,7 +31,12 @@ const TopBar: React.FC<{
             navigate("/");
           }}
         />
-        <Button text label={t("bookmarks.bookmarks")} className="pl-0" />
+        <Button
+          text
+          label={t("bookmarks.bookmarks")}
+          className="pl-0"
+          pt={{ label: { className: "text-xl" } }}
+        />
       </div>
       <div>
         {bookmarks.length > 0 && (
