@@ -6,7 +6,7 @@ import { setCurrentCat } from "../../slices/preferenceSlice";
 import Design from "../../assets/imgs/Design.jpg";
 
 const imgMap: Record<string, string> = {
-  "669f636482acb022f9139e03": `url(${Design})`,
+  "669f636482acb022f9139e03": Design,
 };
 
 // const imgMap: Record<string, string> = {
