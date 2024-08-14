@@ -11,6 +11,7 @@ import { useCreateAdMutation } from "../../slices/adsSlice";
 import { useTranslation } from "react-i18next";
 import { Toast } from "primereact/toast";
 import { cat, useGetCatsQuery } from "../../slices/catSlice";
+import { region } from "../../assets/regions";
 
 export type division = {
   label: string;
@@ -41,7 +42,7 @@ const Create: React.FC = () => {
   const [cat, setCat] = useState<cat | undefined>();
   const [tags, setTags] = useState<string[]>([]);
   const [links, setLinks] = useState<string[]>([]);
-  const [divisions, setDivisions] = useState<division[]>([]);
+  const [selectedRegions, setSelectedRegions] = useState<region[]>([]);
   const [startDate, setStartDate] = useState<Date>(addDays(3));
   const [endDate, setEndDate] = useState<Date>(endOfDate(addDays(7)));
 
@@ -63,6 +64,16 @@ const Create: React.FC = () => {
       });
     }
   }, [isCreateCatError]);
+
+  useEffect(() => {
+    if (isCatsError) {
+      toast.current?.show({
+        severity: "error",
+        summary: "Error",
+        detail: JSON.stringify(catsError),
+      });
+    }
+  }, [isCatsError]);
 
   return (
     <div className="w-full h-full flex flex-col overflow-auto">
@@ -110,8 +121,8 @@ const Create: React.FC = () => {
               endDate={endDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
-              divisions={divisions}
-              setDivisions={setDivisions}
+              selectedRegions={selectedRegions}
+              setSelectedRegions={setSelectedRegions}
               handleBack={() => {
                 setActiveIndex(1);
               }}
@@ -124,8 +135,8 @@ const Create: React.FC = () => {
                     tags,
                     startDate,
                     endDate,
-                    locations: divisions.map(
-                      (division: division) => division.value
+                    locations: selectedRegions.map(
+                      (region: region) => region.code
                     ),
                   });
                 }

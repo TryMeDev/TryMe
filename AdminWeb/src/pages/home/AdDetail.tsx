@@ -121,7 +121,9 @@ const AdDetail: React.FC<{ ad: ad }> = ({ ad }) => {
           {`${t("locations")}${ad?.locations
             .map(
               (locationCode) =>
-                regions[locationCode.split("-")[0]].divisions[locationCode]
+                regions.find((region) => region.code === locationCode)?.display[
+                  lang
+                ] ?? locationCode
             )
             .join(", ")}
           `}

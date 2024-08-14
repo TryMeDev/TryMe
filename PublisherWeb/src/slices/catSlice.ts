@@ -1,11 +1,13 @@
 import { apiSlice } from "./apiSlice";
 
+export type display = {
+  "zh-TW": string;
+  en: string;
+};
+
 export type cat = {
   _id: string;
-  display: {
-    "zh-TW": string;
-    en: string;
-  };
+  display: display;
 };
 
 type catResponse = cat[];

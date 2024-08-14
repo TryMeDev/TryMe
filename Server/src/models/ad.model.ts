@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { divisions } from "../../assets/regions";
 
 const adSchema = new Schema({
   imgs: {
@@ -29,7 +28,6 @@ const adSchema = new Schema({
   },
   locations: {
     type: [String],
-    enum: divisions,
     default: [],
   },
   tags: {

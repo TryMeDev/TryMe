@@ -7,14 +7,8 @@ import {
   getDaysDifference,
   isTimeConflict,
 } from "../../assets/utils";
-import { regions } from "../../assets/regions";
-import {
-  AutoComplete,
-  AutoCompleteChangeEvent,
-  AutoCompleteCompleteEvent,
-} from "primereact/autocomplete";
+import { region, regions } from "../../assets/regions";
 import { useTranslation } from "react-i18next";
-import { division } from "./Create";
 import useProfile from "../../hooks/useProfile";
 import { Checkbox } from "primereact/checkbox";
 import { Dialog } from "primereact/dialog";
@@ -24,6 +18,7 @@ import { cat } from "../../slices/catSlice";
 import { Dropdown, DropdownChangeEvent } from "primereact/dropdown";
 import { Chips } from "primereact/chips";
 import { useAppSelector } from "../../app/store";
+import { MultiSelect } from "primereact/multiselect";
 
 const MINIMUM_CHARGE = 5;
 
@@ -36,22 +31,6 @@ function hasIntersection(arr1: any[], arr2: any[]) {
   return false;
 }
 
-type region = {
-  label: string;
-  code: string;
-  items: division[];
-};
-const regionDataList: region[] = Object.entries(regions).map(
-  ([regionCode, region]) => ({
-    label: region.name,
-    code: regionCode,
-    items: Object.entries(region.divisions).map(([divisionCode, division]) => ({
-      label: division,
-      value: divisionCode,
-    })),
-  })
-);
-
 const SetInfo: React.FC<{
   cats: cat[];
   cat: cat | undefined;
@@ -62,8 +41,8 @@ const SetInfo: React.FC<{
   setStartDate: React.Dispatch<React.SetStateAction<Date>>;
   endDate: Date;
   setEndDate: React.Dispatch<React.SetStateAction<Date>>;
-  divisions: division[];
-  setDivisions: React.Dispatch<React.SetStateAction<division[]>>;
+  selectedRegions: region[];
+  setSelectedRegions: React.Dispatch<React.SetStateAction<region[]>>;
   handleBack: () => void;
   handleNext: () => void;
 }> = ({
@@ -76,8 +55,8 @@ const SetInfo: React.FC<{
   setStartDate,
   endDate,
   setEndDate,
-  divisions,
-  setDivisions,
+  selectedRegions,
+  setSelectedRegions,
   handleBack,
   handleNext,
 }) => {
@@ -90,30 +69,11 @@ const SetInfo: React.FC<{
 
   const [isInstructionsAccepted, setIsInstructionsAccepted] =
     useState<boolean>(false);
-  const [filteredDivisions, setFilteredDivisions] =
-    useState<region[]>(regionDataList);
 
   const charge =
     startDate && endDate
-      ? getDaysDifference(startDate, endDate) * divisions.length
+      ? getDaysDifference(startDate, endDate) * selectedRegions.length
       : 0;
-
-  const search = (event: AutoCompleteCompleteEvent) => {
-    let query = event.query;
-    let _filteredCities = [];
-
-    for (let country of regionDataList) {
-      let filteredItems = country.items.filter(
-        (item) => item.label.toLowerCase().indexOf(query.toLowerCase()) !== -1
-      );
-
-      if (filteredItems && filteredItems.length) {
-        _filteredCities.push({ ...country, ...{ items: filteredItems } });
-      }
-    }
-
-    setFilteredDivisions(_filteredCities);
-  };
 
   const isConflict = isSuccess
     ? isTimeConflict(
@@ -125,7 +85,7 @@ const SetInfo: React.FC<{
                 ad.status === "paid" ||
                 ad.status === "approved") &&
               hasIntersection(
-                divisions.map((division) => division.value),
+                selectedRegions.map((region) => region.code),
                 ad.locations
               )
           )
@@ -164,20 +124,16 @@ const SetInfo: React.FC<{
       />
 
       <label htmlFor="locations">{t("create.setInfo.locations")}</label>
-      <AutoComplete
-        inputId="locations"
-        pt={{ container: { className: "w-full" } }}
-        value={divisions}
-        onChange={(e: AutoCompleteChangeEvent) => {
-          setDivisions(e.value);
+      <MultiSelect
+        value={selectedRegions}
+        onChange={(e) => {
+          if (e.value) {
+            setSelectedRegions(e.value);
+          }
         }}
-        suggestions={filteredDivisions}
-        completeMethod={search}
-        field="label"
-        optionGroupLabel="label"
-        optionGroupChildren="items"
-        dropdown
-        multiple
+        filter
+        options={regions}
+        optionLabel={`display.${lang}`}
       />
 
       <label htmlFor="startDate">{t("create.setInfo.startDate")}</label>

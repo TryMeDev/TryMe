@@ -12,7 +12,7 @@ type preferenceState = {
 
 const preferenceInitialState: preferenceState = {
   lang: i18next.resolvedLanguage || "en",
-  location: "HK-KLN",
+  location: "HK",
   is18: false,
   isSet: true,
   searchingTags: [],
