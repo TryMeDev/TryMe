@@ -26,7 +26,7 @@ const AppBar: React.FC<{ children?: React.ReactNode; canLogout?: boolean }> = ({
       <Button
         text
         label="TryMe"
-        pt={{ label: { className: "text-xl" } }}
+        pt={{ label: { className: "text-2xl" } }}
         onClick={() => {
           navigate("/");
         }}

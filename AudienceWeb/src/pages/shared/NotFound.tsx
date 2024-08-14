@@ -12,7 +12,7 @@ const NotFound: React.FC<{ reGetById: () => void }> = ({ reGetById }) => {
       <div className="w-full flex items-center border-b border-gray-200">
         <Button
           icon="pi pi-home"
-          className="bg-opacity-10 bg-black"
+          className="!bg-opacity-30 !bg-black"
           text
           rounded
           onClick={() => {

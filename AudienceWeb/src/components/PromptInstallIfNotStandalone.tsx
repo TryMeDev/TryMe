@@ -12,8 +12,8 @@ const PromptInstallIfNotStandalone: React.FC<{ children: ReactNode }> = ({
   ) : isStandalone ? (
     children
   ) : (
-    // children
-    <PromptInstallPWAPage />
+    children
+    // <PromptInstallPWAPage />
   );
 };
 

@@ -27,7 +27,7 @@ const NotFound: React.FC<{ isSearch: boolean }> = ({ isSearch }) => {
         <Button
           text
           className="p-0"
-          pt={{ label: { className: "text-xl" } }}
+          pt={{ label: { className: "text-2xl" } }}
           label="TryMe"
         />
       </div>

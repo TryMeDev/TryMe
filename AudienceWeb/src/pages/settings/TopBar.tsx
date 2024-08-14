@@ -15,7 +15,7 @@ const TopBar: React.FC = () => {
       <Button
         text
         label={t("settings.settings")}
-        pt={{ label: { className: "text-xl" } }}
+        pt={{ label: { className: "text-2xl" } }}
       />
       <Button
         text

@@ -33,7 +33,7 @@ const Content: React.FC<{ tags: tag[] }> = ({ tags }) => {
               navigate("/viewer");
             }}
           />
-          <h2 className="text-xl">{t("search.search")}</h2>
+          <h2 className="text-2xl">{t("search.search")}</h2>
         </div>
       </div>
 

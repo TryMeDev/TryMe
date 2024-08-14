@@ -32,7 +32,7 @@ const TopButtons: React.FC<{
       <Toast ref={toast} />
       <Button
         icon="pi pi-home"
-        className="bg-opacity-10 bg-black"
+        className="!bg-opacity-30 !bg-black"
         text
         rounded
         pt={{ icon: { className: "text-gray-100" } }}
@@ -47,7 +47,7 @@ const TopButtons: React.FC<{
         (bookmarkIds?.includes(currentAdId) ? (
           <Button
             icon="pi pi-bookmark-fill"
-            className="bg-opacity-10 bg-black"
+            className="!bg-opacity-30 !bg-black"
             text
             rounded
             pt={{ icon: { className: "text-gray-100" } }}
@@ -58,7 +58,7 @@ const TopButtons: React.FC<{
         ) : (
           <Button
             icon="pi pi-bookmark"
-            className="bg-opacity-10 bg-black"
+            className="!bg-opacity-30 !bg-black"
             text
             rounded
             pt={{ icon: { className: "text-gray-100" } }}

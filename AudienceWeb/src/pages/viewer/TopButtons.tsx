@@ -72,7 +72,7 @@ const TopButtons: React.FC<TopButtonsProps> = ({
       <Toast ref={toast} />
       <Button
         icon="pi pi-chevron-left"
-        className="bg-opacity-10 bg-black"
+        className="!bg-opacity-30 !bg-black"
         text
         rounded
         pt={{ icon: { className: "text-gray-100" } }}
@@ -83,7 +83,7 @@ const TopButtons: React.FC<TopButtonsProps> = ({
           <>
             <Button
               icon="pi pi-share-alt"
-              className="bg-opacity-10 bg-black"
+              className="!bg-opacity-30 !bg-black"
               text
               rounded
               pt={{ icon: { className: "text-gray-100" } }}
@@ -95,7 +95,7 @@ const TopButtons: React.FC<TopButtonsProps> = ({
                   ? "pi pi-bookmark-fill"
                   : "pi pi-bookmark"
               }
-              className="bg-opacity-10 bg-black"
+              className="!bg-opacity-30 !bg-black"
               text
               rounded
               pt={{ icon: { className: "text-gray-100" } }}
@@ -106,7 +106,7 @@ const TopButtons: React.FC<TopButtonsProps> = ({
         {!isSearch && (
           <Button
             icon="pi pi-search"
-            className="bg-opacity-10 bg-black"
+            className="!bg-opacity-30 !bg-black"
             text
             rounded
             pt={{ icon: { className: "text-gray-100" } }}

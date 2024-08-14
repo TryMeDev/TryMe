@@ -58,6 +58,7 @@ const Viewer: React.FC = () => {
         <NotFound isSearch={isSearch} />
       ) : (
         <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
+          <meta name="theme-color" content="#000000" />
           <LoadingScreen isLoading={isGetIdsLoading} />
           <Content adIds={adIds ?? []} />
         </div>

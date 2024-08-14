@@ -4,6 +4,7 @@ import { ad } from "../../slices/adsSlice";
 import ImageSlider from "./ImageSlider";
 import Slider from "react-slick";
 import TopButtons from "./TopButtons";
+import BottomTags from "./BottomTags";
 
 const Content: React.FC<{ adIds: string[] }> = ({ adIds }) => {
   const preference = useAppSelector((state) => state.preference);
@@ -46,6 +47,8 @@ const Content: React.FC<{ adIds: string[] }> = ({ adIds }) => {
           isSearch={isSearch}
         />
       )}
+
+      <BottomTags tags={ads[currentAdId]?.tags} />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Content: React.FC<{ cats: cat[] }> = ({ cats }) => {
     <div className="w-full h-full flex flex-col">
       <TopBar />
 
-      <div className="h-[calc(100%_-_50px)] overflow-auto p-2 flex flex-col gap-1 items-center">
+      <div className="h-[calc(100%_-_50px)] overflow-auto p-4 pt-2 flex flex-col gap-1 items-center justify-between">
         {cats.map((cat) => (
           <CatButton cat={cat} key={cat._id} />
         ))}

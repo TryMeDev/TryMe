@@ -16,6 +16,7 @@ const Bookmark: React.FC<{
 
   return (
     <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
+      <meta name="theme-color" content="#000000" />
       <LoadingScreen isLoading={false} />
       <Toast ref={toast} />
       <div className="h-full w-full flex flex-col bg-black">
@@ -36,7 +37,7 @@ const Bookmark: React.FC<{
             <div>
               <Button
                 icon="pi pi-share-alt"
-                className="bg-opacity-10 bg-black"
+                className="!bg-opacity-30 !bg-black"
                 text
                 pt={{ icon: { className: "text-gray-100" } }}
                 rounded

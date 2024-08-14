@@ -35,7 +35,7 @@ const TopBar: React.FC<{
           text
           label={t("bookmarks.bookmarks")}
           className="pl-0"
-          pt={{ label: { className: "text-xl" } }}
+          pt={{ label: { className: "text-2xl" } }}
         />
       </div>
       <div>
