@@ -5,13 +5,13 @@ import { cat, display } from "../../slices/catsSlice";
 import { setCurrentCat } from "../../slices/preferenceSlice";
 import Design from "../../assets/imgs/Design.jpg";
 
-// const imgMap: Record<string, string> = {
-//   "669f636482acb022f9139e03": `url(${Design})`,
-// };
-
 const imgMap: Record<string, string> = {
-  "66b6e8e4e82430e7d6def2e0": Design,
+  "669f636482acb022f9139e03": `url(${Design})`,
 };
+
+// const imgMap: Record<string, string> = {
+//   "66b6e8e4e82430e7d6def2e0": Design,
+// };
 
 const CatButton: React.FC<{ cat: cat }> = ({ cat }) => {
   const dispatch = useAppDispatch();
