@@ -24,7 +24,12 @@ const NotFound: React.FC<{ isSearch: boolean }> = ({ isSearch }) => {
             }
           }}
         />
-        <Button text className="p-0" label="TryMe" />
+        <Button
+          text
+          className="p-0"
+          pt={{ label: { className: "text-xl" } }}
+          label="TryMe"
+        />
       </div>
 
       <div className="flex flex-grow justify-center items-center p-4">

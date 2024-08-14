@@ -30,6 +30,7 @@ const CatButton: React.FC<{ cat: cat }> = ({ cat }) => {
       onClick={() => {
         dispatch(setCurrentCat({ cat: cat._id }));
       }}
+      outlined
     >
       <div className="w-full h-full flex justify-center items-center">
         <span className="font-bold text-2xl text-black bg-white bg-opacity-30">
