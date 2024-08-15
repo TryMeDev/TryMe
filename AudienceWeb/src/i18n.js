@@ -56,7 +56,7 @@ i18n
             getTagsError:
               "An error has occurred. Please ensure you are connected to the network and try reloading. If the issue persists, please try again later.",
             search: "Search",
-            hint: "Please enter the tags you want to search for",
+            hint: "Please enter and select the tags you want to search for",
           },
           bookmarks: {
             bookmarks: "My Bookmarks",
@@ -76,7 +76,7 @@ i18n
       },
       "zh-TW": {
         translation: {
-          home: { lookforward: "敬請期待更多精彩内容！" },
+          home: { lookforward: "敬請期待更多精彩內容！" },
           share: { notFound: "非常抱歉，連結的帖子可能已被移除" },
           error: {
             title: "糟糕",
@@ -87,7 +87,7 @@ i18n
             noRecommendations:
               "很抱歉，我們未能給你推薦任何帖子，請更改你的喜好或等待創作者投放更多帖子",
             noSearchResult:
-              "沒有搜尋結果，請更改搜尋標簽，或更改不感興趣的類別，或等待創作者投放更多帖子",
+              "沒有搜尋結果，請更改搜尋標簽，或更改不感興趣的類別，或等待創作者發佈更多帖子",
             getIdsError:
               "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",
           },
@@ -104,7 +104,7 @@ i18n
             getTagsError:
               "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",
             search: "搜尋",
-            hint: "請輸入你要搜尋的標簽",
+            hint: "請輸入並選擇你要搜尋的標籤",
           },
           bookmarks: {
             bookmarks: "我的收藏",
@@ -117,7 +117,7 @@ i18n
             "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",
           language: "語言",
           location: "地區",
-          copiedToClipboard: "已複製到剪貼版",
+          copiedToClipboard: "已複製到剪貼簿",
           success: "成功",
         },
       },

@@ -9,6 +9,7 @@ const tagsSlice = apiSlice.injectEndpoints({
     getTags: builder.query<tagsResponse, { catId: string }>({
       query: ({ catId }) => ({
         url: "ad/tags/",
+        method: "POST",
         body: { catId },
       }),
     }),

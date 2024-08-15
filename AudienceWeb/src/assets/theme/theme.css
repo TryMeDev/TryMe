@@ -10725,7 +10725,7 @@
   }
 
   .p-toast {
-    width: 25rem;
+    max-width: 90vw;
     white-space: pre-line;
     word-break: break-word;
   }

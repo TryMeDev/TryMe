@@ -75,60 +75,37 @@ router.post("/browse", async (req: Request, res: Response) => {
       (stringId: string) => new mongoose.Types.ObjectId(stringId)
     );
 
-    let searchCriteria = {};
-    if (isBrowse) {
-      if (is18) {
-        searchCriteria = {
-          status: "approved",
-          endDate: { $gte: new Date() },
-          catId: { $in: catObjectIds },
-          locations: { $in: locations },
-          startDate: { $lte: new Date() },
-        };
-      } else {
-        searchCriteria = {
-          status: "approved",
-          is18: false,
-          endDate: { $gte: new Date() },
-          catId: { $in: catObjectIds },
-          locations: { $in: locations },
-          startDate: { $lte: new Date() },
-        };
-      }
-    } else {
-      if (is18) {
-        searchCriteria = {
-          status: "approved",
-          endDate: { $gte: new Date() },
-          tags: { $in: tags },
-          catId: { $in: catObjectIds },
-          locations: { $in: locations },
-          startDate: { $lte: new Date() },
-        };
-      } else {
-        searchCriteria = {
-          status: "approved",
-          is18: false,
-          endDate: { $gte: new Date() },
-          tags: { $in: tags },
-          catId: { $in: catObjectIds },
-          locations: { $in: locations },
-          startDate: { $lte: new Date() },
-        };
-      }
+    let searchCriteria: {
+      status: string;
+      endDate: { $gte: Date };
+      startDate: { $lte: Date };
+      catId: { $in: any };
+      locations: { $in: any };
+      is18?: boolean;
+      tags?: { $in: any };
+    } = {
+      status: "approved",
+      endDate: { $gte: new Date() },
+      startDate: { $lte: new Date() },
+      catId: { $in: catObjectIds },
+      locations: { $in: locations },
+    };
+
+    if (!is18) {
+      searchCriteria.is18 = false;
     }
 
-    const ads = await Ad.aggregate([
-      {
-        $match: searchCriteria,
-      },
-      {
-        $project: {
-          _id: 1,
-        },
-      },
+    if (!isBrowse) {
+      searchCriteria.tags = { $in: tags };
+    }
+
+    const pipeline = [
+      { $match: searchCriteria },
+      { $project: { _id: 1 } },
       { $sample: { size: 100 } },
-    ]);
+    ];
+
+    const ads = await Ad.aggregate(pipeline);
 
     return res.status(200).json(ads.map((ad) => ad._id));
   } catch (error) {
@@ -138,14 +115,14 @@ router.post("/browse", async (req: Request, res: Response) => {
 });
 
 // audience / admin autocomplete tags
-router.get("/tags", async (req: Request, res: Response) => {
+router.post("/tags", async (req: Request, res: Response) => {
   try {
     const { catId } = req.body;
     const catObjectId = new mongoose.Types.ObjectId(catId);
 
     const tags = await Tag.find(
       { catId: catObjectId },
-      { _id: 0, name: 1, catId: 0 }
+      { _id: 0, name: 1 }
     ).lean();
 
     return res.status(200).json(tags);

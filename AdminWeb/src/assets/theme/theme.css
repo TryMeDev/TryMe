@@ -7867,6 +7867,7 @@
     margin-left: 0.5rem;
   }
   .p-toast {
+    max-width: 90vw;
     opacity: 1;
   }
   .p-toast .p-toast-message {

@@ -8,7 +8,7 @@ const Content: React.FC = () => {
   return (
     <>
       <TopBar />
-      <div className="w-full min-h-[90%] p-3">
+      <div className="w-full min-h-[90%] p-4">
         <LangDropdown />
         <LocationDropdown />
         <Is18Toggle />

@@ -18,7 +18,7 @@ const NotFound: React.FC<{ isSearch: boolean }> = ({ isSearch }) => {
           text
           onClick={() => {
             if (isSearch) {
-              navigate("search");
+              navigate("/search");
             } else {
               dispatch(setCurrentCat({ cat: "" }));
             }

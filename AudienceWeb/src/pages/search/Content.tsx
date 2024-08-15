@@ -26,6 +26,7 @@ const Content: React.FC<{ tags: tag[] }> = ({ tags }) => {
       <div className="w-full p-3">
         <div className="flex items-center gap-1">
           <Button
+            text
             icon="pi pi-chevron-left"
             className="p-0 w-auto"
             onClick={() => {
@@ -37,7 +38,7 @@ const Content: React.FC<{ tags: tag[] }> = ({ tags }) => {
         </div>
       </div>
 
-      <div className="w-full h-full p-2">
+      <div className="w-full h-full px-4">
         <div className="flex flex-col">
           <label>{t("search.hint")}</label>
           <AutoComplete
@@ -62,6 +63,7 @@ const Content: React.FC<{ tags: tag[] }> = ({ tags }) => {
                 setSuggestions(newSuggestions);
               }
             }}
+            forceSelection
             multiple
           />
         </div>

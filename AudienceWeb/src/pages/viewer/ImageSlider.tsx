@@ -43,6 +43,7 @@ const ImageSlider: React.FC<{
           {ad?.imgs?.map((img, idx) => {
             return ad.links[idx] === "" ? (
               <Image
+                key={idx}
                 src={img}
                 imageClassName="h-[100svh] w-[100svw] object-contain"
               />

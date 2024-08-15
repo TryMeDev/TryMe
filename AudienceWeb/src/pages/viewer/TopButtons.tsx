@@ -37,7 +37,7 @@ const TopButtons: React.FC<TopButtonsProps> = ({
   const handleBackClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (isSearch) {
-      navigate("search");
+      navigate("/search");
     } else {
       dispatch(setCurrentCat({ cat: "" }));
     }
@@ -64,7 +64,7 @@ const TopButtons: React.FC<TopButtonsProps> = ({
 
   const handleSearchClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigate("search");
+    navigate("/search");
   };
 
   return (
