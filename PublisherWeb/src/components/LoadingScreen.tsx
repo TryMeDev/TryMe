@@ -7,10 +7,10 @@ const LoadingScreen: React.FC<{
 }> = ({ isLoading }) => {
   return (
     isLoading && (
-      <>
-        <ProgressSpinner className="absolute m-auto left-0 right-0 top-0 bottom-0" />
-        <BlockUI blocked fullScreen containerClassName="" />
-      </>
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <ProgressSpinner className="z-50" />
+        <BlockUI blocked fullScreen />
+      </div>
     )
   );
 };
