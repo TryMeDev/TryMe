@@ -19,7 +19,7 @@ const TopBar: React.FC = () => {
     <div className="w-full flex justify-between items-center pr-2">
       <Button text label="TryMe" pt={{ label: { className: "text-2xl" } }} />
       <div>
-        <a href={PUBLISHER_URL}>
+        <a target="_blank" rel="noopener noreferrer" href={PUBLISHER_URL}>
           <Button icon="pi pi-pen-to-square" text onClick={(e) => {}} />
         </a>
         <Button
