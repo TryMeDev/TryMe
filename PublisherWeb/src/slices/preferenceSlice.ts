@@ -5,14 +5,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 type preferenceState = { lang: string };
 
 const preferenceInitialState: preferenceState = {
-  lang: i18next.resolvedLanguage ?? "",
+  lang: i18next.resolvedLanguage ?? "en",
 };
 
 export const initializeLanguage = createAsyncThunk(
   "preference/initializeLanguage",
   async () => {
     await i18next.init();
-    return i18next.language;
+    return i18next.resolvedLanguage ?? "en";
   }
 );
 
