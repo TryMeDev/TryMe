@@ -66,13 +66,13 @@ const UploadImages: React.FC<{ handleConfirmed: (imgs: File2[]) => void }> = ({
           return (
             <div className="w-full flex items-center justify-between mb-2 gap-3">
               {chooseButton}
-              <div className="flex items-center gap-3 flex-grow">
-                <span>{`${formatedValue} / ${formatedMaxValue}`}</span>
+              <div className="flex flex-col items-center gap-1 flex-grow">
+                <span className="md:text-sm text-xs">{`${formatedValue} / ${formatedMaxValue}`}</span>
                 <ProgressBar
                   value={value}
                   showValue={false}
+                  className="w-full"
                   style={{
-                    flexGrow: 1,
                     height: "1rem",
                   }}
                   color={isExceedTotalSize ? "red" : ""}
@@ -85,20 +85,23 @@ const UploadImages: React.FC<{ handleConfirmed: (imgs: File2[]) => void }> = ({
         itemTemplate={(inFile: object, props: ItemTemplateOptions) => {
           const file = inFile as File2;
           return (
-            <div className="w-full flex gap-4">
+            <div className="w-full flex !p-1 items-start">
               <Image
                 alt={file.name}
                 src={file.objectURL}
-                className="w-[15vw] aspect-[9/16] overflow-hidden"
+                className="md:w-[15%] w-[25%] aspect-[9/16] overflow-hidden"
                 imageClassName="w-full h-full object-cover"
               />
-              <div className="flex flex-col items-start">
-                <span>{file.name}</span>
+              <div className="md:w-[calc(85%-20px)] w-[calc(75%-20px)] pl-4 flex flex-col items-start gap-2">
+                <span className="w-full text-wrap break-words text-left">
+                  {file.name}
+                </span>
                 <Tag value={props.formatSize} severity="warning" />
               </div>
               <Button
                 icon="pi pi-times"
-                className="p-button-outlined p-button-rounded p-button-danger ml-auto"
+                className="p-button-danger !p-0 ml-auto !w-auto"
+                text
                 onClick={(e) => {
                   setTotalSize(totalSize - file.size);
                   props.onRemove(e);
@@ -121,10 +124,12 @@ const UploadImages: React.FC<{ handleConfirmed: (imgs: File2[]) => void }> = ({
         chooseOptions={{
           icon: "pi pi-fw pi-images",
           label: t("create.uploadImages.choose"),
+          className: "!px-2",
         }}
         uploadOptions={{
           icon: "pi pi-caret-right",
           label: t("create.uploadImages.next"),
+          className: "!px-2",
         }}
         customUpload
         uploadHandler={({ files }: FileUploadHandlerEvent) => {
