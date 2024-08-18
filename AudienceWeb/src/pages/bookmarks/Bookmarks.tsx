@@ -23,8 +23,10 @@ const Bookmarks: React.FC = () => {
   const { data: allBookmarks, deleteData: deleteBookmark } = indexedDBContext;
   const [selectedCats, setSelectedCats] = useState<cat[]>([]);
 
-  const bookmarks = allBookmarks.filter((bookmark) =>
-    selectedCats.map((cat) => cat._id).includes(bookmark.catId)
+  const bookmarks = allBookmarks.filter(
+    (bookmark) =>
+      selectedCats.length === 0 ||
+      selectedCats.some((cat) => bookmark.catIds.includes(cat._id))
   );
 
   const {

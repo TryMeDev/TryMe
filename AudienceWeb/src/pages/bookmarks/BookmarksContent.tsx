@@ -45,7 +45,7 @@ const BookmarksContent: React.FC<{
         deleteBookmark={deleteBookmark}
       />
 
-      <div className="w-full p-2 flex flex-wrap gap-1 justify-between">
+      <div className="w-full p-4 flex flex-wrap gap-1 justify-between">
         <MultiSelect
           value={selectedCats}
           onChange={(e) => {
