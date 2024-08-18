@@ -8,11 +8,14 @@ import Error from "../../components/Error";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useTranslation } from "react-i18next";
 import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
+import { useThemeColor } from "../../hooks/useThemeColor";
 
 const Bookmarks: React.FC = () => {
   const { t } = useTranslation();
   const [isPreview, setIsPreview] = React.useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(0);
+
+  useThemeColor(isPreview ? "#000000" : "#FFFFFF");
 
   const indexedDBContext = useContext(IndexedDBContext);
 
@@ -44,7 +47,6 @@ const Bookmarks: React.FC = () => {
 
   return (
     <PromptInstallIfNotStandalone>
-      <meta name="theme-color" content="#FFFFFF" />
       {isCatsError ? (
         <Error
           onReload={() => {

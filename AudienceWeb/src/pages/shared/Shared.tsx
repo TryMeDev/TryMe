@@ -5,9 +5,12 @@ import NotFound from "./NotFound";
 import ImageSlider from "./ImageSlider";
 import TopButtons from "./TopButtons";
 import { useParams } from "react-router-dom";
+import { useThemeColor } from "../../hooks/useThemeColor";
 
 const Shared: React.FC = () => {
   const { adId } = useParams();
+
+  useThemeColor("#000000");
 
   const {
     data: ad,

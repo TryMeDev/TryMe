@@ -9,6 +9,7 @@ import NotFound from "./NotFound";
 import useIsStandalone from "../../hooks/useIsStandalone";
 import Content from "./Content";
 import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
+import { useThemeColor } from "../../hooks/useThemeColor";
 
 const Viewer: React.FC = () => {
   const navigate = useNavigate();
@@ -45,6 +46,8 @@ const Viewer: React.FC = () => {
     }
   }, [preference.currentCat]);
 
+  useThemeColor("#000000");
+
   return (
     <PromptInstallIfNotStandalone>
       {isGetIdsError ? (
@@ -58,7 +61,6 @@ const Viewer: React.FC = () => {
         <NotFound isSearch={isSearch} />
       ) : (
         <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
-          <meta name="theme-color" content="#000000" />
           <LoadingScreen isLoading={isGetIdsLoading} />
           <Content adIds={adIds ?? []} />
         </div>

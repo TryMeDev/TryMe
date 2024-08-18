@@ -16,7 +16,6 @@ const Bookmark: React.FC<{
 
   return (
     <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
-      <meta name="theme-color" content="#000000" />
       <LoadingScreen isLoading={false} />
       <Toast ref={toast} />
       <div className="h-full w-full flex flex-col bg-black">

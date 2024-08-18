@@ -7,8 +7,10 @@ import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotSta
 import { useGetCatsQuery } from "../../slices/catsSlice";
 import Error from "../../components/Error";
 import Content from "./Content";
+import { useThemeColor } from "../../hooks/useThemeColor";
 
 const Home: React.FC = () => {
+  useThemeColor("#FFFFFF");
   const navigate = useNavigate();
 
   const preference = useAppSelector((state) => state.preference);
@@ -35,7 +37,6 @@ const Home: React.FC = () => {
 
   return (
     <PromptInstallIfNotStandalone>
-      <meta name="theme-color" content="#FFFFFF" />
       {isCatsError ? (
         <Error
           onReload={() => {

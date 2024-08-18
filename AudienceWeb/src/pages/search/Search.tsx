@@ -6,8 +6,10 @@ import Error from "../../components/Error";
 import { useAppSelector } from "../../app/store";
 import Content from "./Content";
 import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
+import { useThemeColor } from "../../hooks/useThemeColor";
 
 const Search: React.FC = () => {
+  useThemeColor("#FFFFFF");
   const { t } = useTranslation();
 
   const preference = useAppSelector((state) => state.preference);
