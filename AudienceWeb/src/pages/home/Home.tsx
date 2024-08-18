@@ -35,6 +35,7 @@ const Home: React.FC = () => {
 
   return (
     <PromptInstallIfNotStandalone>
+      <meta name="theme-color" content="#FFFFFF" />
       {isCatsError ? (
         <Error
           onReload={() => {

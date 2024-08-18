@@ -1,7 +1,7 @@
 {
   "name": "tryme-audience",
   "private": true,
-  "version": "0.2.5",
+  "version": "0.2.6",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,7 +23,8 @@
     "react-router-dom": "^6.24.1",
     "react-slick": "^0.29.0",
     "tailwind-merge": "^2.3.0",
-    "vite-plugin-pwa": "^0.20.0"
+    "vite-plugin-pwa": "^0.20.0",
+    "workbox-window": "^7.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.14.9",

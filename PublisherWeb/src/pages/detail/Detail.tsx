@@ -5,7 +5,7 @@ import LoadingScreen from "../../components/LoadingScreen";
 import AppBar from "../../components/AppBar";
 import { Card } from "primereact/card";
 import LoadingImage from "../../components/LoadingImage";
-import { cat, useGetCatsQuery } from "../../slices/catSlice";
+import { cat, display, useGetCatsQuery } from "../../slices/catSlice";
 import { Button } from "primereact/button";
 import { regions } from "../../assets/regions";
 import { useAppSelector } from "../../app/store";
@@ -18,10 +18,6 @@ import {
 } from "../../slices/adsSlice";
 import { addDays, displayDate } from "../../assets/utils";
 import { Toast } from "primereact/toast";
-
-const divisions: { [key: string]: string } = Object.values(regions)
-  .map((region) => region.divisions)
-  .reduce((a, c) => ({ ...a, ...c }), {});
 
 const Detail: React.FC = () => {
   const toast = useRef<Toast>(null);
@@ -186,7 +182,11 @@ const Detail: React.FC = () => {
                 <div className="text-lg overflow-clip w-full">
                   {t("detail.locations", {
                     locations: ad?.locations
-                      .map((locationCode) => divisions[locationCode])
+                      .map(
+                        (locationCode) =>
+                          regions.find((region) => region.code === locationCode)
+                            ?.display?.[lang as keyof display]
+                      )
                       .join(", "),
                   })}
                 </div>

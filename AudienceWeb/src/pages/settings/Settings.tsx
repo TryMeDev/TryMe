@@ -5,6 +5,7 @@ import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotSta
 const Settings: React.FC = () => {
   return (
     <PromptInstallIfNotStandalone>
+      <meta name="theme-color" content="#FFFFFF" />
       <div className="h-full w-full">
         <Content />
       </div>

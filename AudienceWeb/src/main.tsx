@@ -8,6 +8,7 @@ import "./assets/theme/theme.css";
 import "primeicons/primeicons.css";
 import "./i18n";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+import "./registerSW";
 
 if (import.meta.env.NODE_ENV === "production") {
   disableReactDevTools();

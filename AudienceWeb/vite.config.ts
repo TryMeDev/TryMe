@@ -3,14 +3,14 @@ import react from "@vitejs/plugin-react";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 
 const manifestForPlugIn: Partial<VitePWAOptions> = {
-  registerType: "prompt",
+  registerType: "autoUpdate",
   includeAssets: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
   manifest: {
     name: "TryMe",
     short_name: "TryMe",
     description: "Try Me!",
-    theme_color: "#FFFFFF",
-    background_color: "#FFFFFF",
+    theme_color: "#ffffff",
+    background_color: "#ffffff",
     display: "standalone",
     start_url: "/",
     orientation: "portrait",
@@ -39,6 +39,12 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
         type: "image/png",
         purpose: "any maskable",
       },
+    ],
+  },
+  workbox: {
+    globPatterns: [
+      "**/*.{js,css,html,ico,png,svg,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,otf}",
+      "src/assets/**/*",
     ],
   },
 };
