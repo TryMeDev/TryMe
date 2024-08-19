@@ -63,6 +63,7 @@ i18n
             deleteConfirmHeader: "Delete Confirmation",
             deleteConfirmMsg:
               "Are you sure you want to delete the selected bookmarks?",
+            hint: "Please note that bookmarks are stored locally in your browser. They may be lost depending on your browser.",
           },
           getByIdError:
             "An error has occurred. Please ensure you are connected to the network and try reloading. If the issue persists, please try again later.",
@@ -110,6 +111,7 @@ i18n
             bookmarks: "我的收藏",
             deleteConfirmHeader: "確認刪除",
             deleteConfirmMsg: "你是否確認要取消收藏已選擇的帖子？",
+            hint: "請注意，收藏內容儲存在你的瀏覽器中。視乎瀏覽器，收藏可能會丟失。",
           },
           getByIdError:
             "發生了錯誤。請確保你已連接網絡，然後重新載入。如問題持續，請稍後再試。",

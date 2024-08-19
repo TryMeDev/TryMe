@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../app/store";
 import { ad } from "../../slices/adsSlice";
 import ImageSlider from "./ImageSlider";
@@ -15,6 +15,23 @@ const Content: React.FC<{ adIds: string[] }> = ({ adIds }) => {
   const isSearch = preference?.searchingTags?.length > 0;
 
   const currentAdId = adIds?.[currentPage];
+
+  useEffect(() => {
+    const sliderElement = document.querySelector(".slick-slider");
+    if (sliderElement) {
+      if (currentPage === 0) {
+        document.body.style.overscrollBehaviorY = "auto contain";
+      } else if (currentPage === adIds.length - 1) {
+        document.body.style.overscrollBehaviorY = "contain auto";
+      } else {
+        document.body.style.overscrollBehaviorY = "contain";
+      }
+    }
+
+    return () => {
+      document.body.style.overscrollBehaviorY = "";
+    };
+  }, [currentPage, adIds.length]);
 
   return (
     <div className="h-full w-full flex flex-col bg-black">
