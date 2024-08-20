@@ -59,10 +59,10 @@ const BookmarksContent: React.FC<{
         {bookmarks?.map((bookmark, idx) => {
           if (bookmark?.imgs.length > 0) {
             return (
-              <div className="w-[48%]" key={bookmark._id}>
+              <div className="md:w-[24%] sm:w-[32%] w-[48%]" key={bookmark._id}>
                 {isEditMode && (
                   <ToggleButton
-                    className="absolute"
+                    className="!absolute"
                     onLabel=""
                     offLabel=""
                     onIcon="pi pi-check"
@@ -96,7 +96,7 @@ const BookmarksContent: React.FC<{
                     setCurrentPage(idx);
                     setIsPreview(true);
                   }}
-                />
+                ></Image>
               </div>
             );
           }

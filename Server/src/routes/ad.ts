@@ -52,7 +52,7 @@ router.post("/getbyid", async (req: Request, res: Response) => {
         imgs: convertedAd.imgs,
         links: convertedAd.links,
         tags: convertedAd.tags,
-        catIds: convertedAd.catIds,
+        catId: convertedAd.catId,
         is18: convertedAd.is18,
       });
     }
@@ -79,10 +79,10 @@ router.post("/browse", async (req: Request, res: Response) => {
       status: string;
       endDate: { $gte: Date };
       startDate: { $lte: Date };
-      catId: { $in: any };
-      locations: { $in: any };
+      catId: { $in: mongoose.Types.ObjectId[] };
+      locations: { $in: string[] };
       is18?: boolean;
-      tags?: { $in: any };
+      tags?: { $in: string[] };
     } = {
       status: "approved",
       endDate: { $gte: new Date() },
