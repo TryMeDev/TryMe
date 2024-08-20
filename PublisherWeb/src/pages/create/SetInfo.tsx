@@ -116,7 +116,7 @@ const SetInfo: React.FC<{
         pt={{ container: { className: "w-full" } }}
         value={tags}
         onChange={(e) => {
-          if (e.value) {
+          if (e.value?.length && e.value.length < 10) {
             setTags(e.value);
           }
         }}

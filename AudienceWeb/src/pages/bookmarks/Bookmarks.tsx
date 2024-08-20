@@ -29,7 +29,7 @@ const Bookmarks: React.FC = () => {
   const bookmarks = allBookmarks.filter(
     (bookmark) =>
       selectedCats.length === 0 ||
-      selectedCats.some((cat) => bookmark?.catId === cat._id)
+      selectedCats.map((cat) => cat._id).includes(bookmark?.catId)
   );
 
   const {

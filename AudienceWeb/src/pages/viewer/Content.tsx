@@ -20,9 +20,7 @@ const Content: React.FC<{ adIds: string[] }> = ({ adIds }) => {
     const sliderElement = document.querySelector(".slick-slider");
     if (sliderElement) {
       if (currentPage === 0) {
-        document.body.style.overscrollBehaviorY = "auto contain";
-      } else if (currentPage === adIds.length - 1) {
-        document.body.style.overscrollBehaviorY = "contain auto";
+        document.body.style.overscrollBehaviorY = "auto";
       } else {
         document.body.style.overscrollBehaviorY = "contain";
       }
