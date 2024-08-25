@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoadingScreen from "../../components/LoadingScreen";
 import { useGetByIdQuery } from "../../slices/adsSlice";
 import NotFound from "./NotFound";
@@ -18,6 +18,13 @@ const Shared: React.FC = () => {
     isLoading: isGetByIdLoading,
     refetch: reGetById,
   } = useGetByIdQuery({ _id: adId || "" }, { skip: !adId });
+
+  useEffect(() => {
+    if (!window.matchMedia("(display-mode: standalone)")) {
+      const pwaUrl = window.location.href;
+      window.open(pwaUrl, "_blank", "display=standalone");
+    }
+  }, []);
 
   return isGetByIdError ? (
     <NotFound reGetById={reGetById} />
