@@ -19,13 +19,6 @@ const Shared: React.FC = () => {
     refetch: reGetById,
   } = useGetByIdQuery({ _id: adId || "" }, { skip: !adId });
 
-  useEffect(() => {
-    if (!window.matchMedia("(display-mode: standalone)")) {
-      const pwaUrl = window.location.href;
-      window.open(pwaUrl, "_blank", "display=standalone");
-    }
-  }, []);
-
   return isGetByIdError ? (
     <NotFound reGetById={reGetById} />
   ) : (
