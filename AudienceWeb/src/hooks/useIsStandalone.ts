@@ -12,3 +12,9 @@ const useIsStandalone = () => {
 };
 
 export default useIsStandalone;
+
+export const openPWA = () => {
+  window.location.href = `web+tryme://${encodeURIComponent(
+    window.location.href
+  )}`;
+};

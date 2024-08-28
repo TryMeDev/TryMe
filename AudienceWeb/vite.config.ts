@@ -14,6 +14,12 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
     display: "standalone",
     start_url: "/",
     orientation: "portrait",
+    protocol_handlers: [
+      {
+        protocol: "web+tryme",
+        url: "/?url=%s",
+      },
+    ],
     icons: [
       {
         src: "/android-chrome-192x192.png",
