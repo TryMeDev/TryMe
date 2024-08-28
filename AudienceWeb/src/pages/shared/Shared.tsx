@@ -6,7 +6,6 @@ import ImageSlider from "./ImageSlider";
 import TopButtons from "./TopButtons";
 import { useParams } from "react-router-dom";
 import { useThemeColor } from "../../hooks/useThemeColor";
-import PromptInstallIfNotStandalone from "../../components/PromptInstallIfNotStandalone";
 
 const Shared: React.FC = () => {
   const { adId } = useParams();
@@ -20,21 +19,17 @@ const Shared: React.FC = () => {
     refetch: reGetById,
   } = useGetByIdQuery({ _id: adId || "" }, { skip: !adId });
 
-  return (
-    <PromptInstallIfNotStandalone>
-      {isGetByIdError ? (
-        <NotFound reGetById={reGetById} />
-      ) : (
-        <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
-          <LoadingScreen isLoading={isGetByIdLoading} />
+  return isGetByIdError ? (
+    <NotFound reGetById={reGetById} />
+  ) : (
+    <div className="h-[100svh] w-[100svw] bg-black overflow-hidden">
+      <LoadingScreen isLoading={isGetByIdLoading} />
 
-          <div className="h-full w-full flex flex-col bg-black">
-            <ImageSlider ad={ad} />
-            <TopButtons currentAd={ad} currentAdId={adId} />
-          </div>
-        </div>
-      )}
-    </PromptInstallIfNotStandalone>
+      <div className="h-full w-full flex flex-col bg-black">
+        <ImageSlider ad={ad} />
+        <TopButtons currentAd={ad} currentAdId={adId} />
+      </div>
+    </div>
   );
 };
 

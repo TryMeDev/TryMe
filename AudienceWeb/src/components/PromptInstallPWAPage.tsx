@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PUBLISHER_URL } from "../config";
 import { Message } from "primereact/message";
-import { openPWA } from "../hooks/useIsStandalone";
 
 type Platform = "windows" | "mac" | "ios" | "android" | "unknown";
 
@@ -160,7 +159,7 @@ const PromptInstallPWAPage: React.FC = () => {
       className="min-h-screen flex items-center justify-center p-4"
       style={{ background: colors.background }}
     >
-      <div className="absolute top-4 right-4">
+      {/* <div className="absolute top-4 right-4">
         <Message
           text={
             <>
@@ -174,7 +173,7 @@ const PromptInstallPWAPage: React.FC = () => {
             openPWA();
           }}
         />
-      </div>
+      </div> */}
 
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full">
         <h1
