@@ -14,6 +14,15 @@ body {
   padding: 0;
   width: 100dvw;
   height: 100dvh;
+  background-image: linear-gradient(
+      to top,
+      transparent 50%,
+      rgba(255, 255, 255, 1) 85%
+    ),
+    url("./assets/imgs/BackgroundImage.webp");
+  background-size: cover;
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 #root {

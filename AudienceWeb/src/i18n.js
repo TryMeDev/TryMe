@@ -27,7 +27,13 @@ i18n
     resources: {
       en: {
         translation: {
-          home: { lookforward: "More content is coming!" },
+          home: {
+            lookforward: "More content is coming!",
+            enterId: "Searching for post by ID",
+            id: "Post ID",
+            search: "Search",
+            cancel: "Cancel",
+          },
           share: { notFound: "Sorry, the post may be removed" },
           error: {
             title: "Oops",
@@ -77,7 +83,13 @@ i18n
       },
       "zh-TW": {
         translation: {
-          home: { lookforward: "敬請期待更多精彩內容！" },
+          home: {
+            lookforward: "敬請期待更多精彩內容！",
+            enterId: "以ID搜尋帖子",
+            search: "搜尋",
+            id: "帖子的ID",
+            cancel: "取消",
+          },
           share: { notFound: "非常抱歉，連結的帖子可能已被移除" },
           error: {
             title: "糟糕",
