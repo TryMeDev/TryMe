@@ -42,7 +42,11 @@ const BookmarksContent: React.FC<{
         isEditMode={isEditMode}
         setIsEditMode={setIsEditMode}
         selectedBookmarkIds={selectedBookmarkIds}
-        deleteBookmark={deleteBookmark}
+        deleteBookmark={(_id) => {
+          deleteBookmark(_id);
+          setSelectedBookmarkIds([]);
+          setIsEditMode(false);
+        }}
       />
 
       <div className="w-full p-4 flex flex-wrap gap-1 justify-between">

@@ -10,7 +10,7 @@ const TopBar: React.FC<{
   isEditMode: boolean;
   setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
   selectedBookmarkIds: string[];
-  deleteBookmark: (_id: string) => Promise<void>;
+  deleteBookmark: (_id: string) => void;
 }> = ({
   bookmarks,
   isEditMode,
@@ -60,9 +60,9 @@ const TopBar: React.FC<{
                 icon: "pi pi-exclamation-triangle",
                 defaultFocus: "accept",
                 accept: () => {
-                  selectedBookmarkIds.forEach((bookmarkId) =>
-                    deleteBookmark(bookmarkId)
-                  );
+                  selectedBookmarkIds.forEach((bookmarkId) => {
+                    deleteBookmark(bookmarkId);
+                  });
                 },
                 reject: () => {},
               });

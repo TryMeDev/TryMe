@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../app/store";
 import { Button } from "primereact/button";
 import { cat, display } from "../../slices/catsSlice";
 import { setCurrentCat } from "../../slices/preferenceSlice";
-import Design from "../../assets/imgs/Design.jpg";
+import Design from "../../assets/imgs/DesignCategory.webp";
 
 const imgMap: Record<string, string> = {
   "669f636482acb022f9139e03": Design,
@@ -18,26 +18,27 @@ const CatButton: React.FC<{ cat: cat }> = ({ cat }) => {
   const lang = useAppSelector((state) => state.preference.lang);
 
   return imgMap[cat._id] ? (
-    <Button
-      className="w-full h-48 relative"
+    <div
+      className="relative cursor-pointer"
       onClick={() => {
         dispatch(setCurrentCat({ cat: cat._id }));
       }}
-      text
-      raised
     >
       <img
         src={imgMap[cat._id]}
         alt={cat.display[lang as keyof display]}
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
+        className="w-full h-auto object-cover rounded-lg shadow-lg"
         loading="lazy"
       />
-      <div className="relative z-10 w-full h-full flex justify-start items-end">
-        <span className="font-bold text-2xl text-black">
+      <div className="absolute top-0 w-full h-full z-10 flex items-center justify-end pr-7">
+        <span
+          className="text-center w-[34%] font-bold sm:text-3xl lg:text-4xl text-2xl glow-white"
+          style={{ color: "var(--primary-color" }}
+        >
           {cat.display[lang as keyof display]}
         </span>
       </div>
-    </Button>
+    </div>
   ) : (
     <Button
       className="w-full"
