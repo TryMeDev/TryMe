@@ -50,6 +50,7 @@ export default function SearchByIdDialog({
       footer={footerContent}
     >
       <InputText
+        className="w-full"
         value={id}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setId(e.target.value)
