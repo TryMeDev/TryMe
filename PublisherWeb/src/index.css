@@ -25,6 +25,12 @@ body {
   background-repeat: no-repeat;
 }
 
+@media (max-width: 768px) {
+  body {
+    background-position: 75% 0;
+  }
+}
+
 #root {
   margin: 0;
   padding: 0;

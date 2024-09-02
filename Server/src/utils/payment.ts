@@ -24,7 +24,6 @@ export async function createPaymentSession(ad: any, email: string) {
           },
           unit_amount:
             UNIT_PRICE *
-            ad.locations.length *
             getDaysDiff(new Date(ad.startDate), new Date(ad.endDate)) *
             100,
         },

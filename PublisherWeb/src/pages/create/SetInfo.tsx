@@ -71,8 +71,8 @@ const SetInfo: React.FC<{
     useState<boolean>(false);
 
   const charge =
-    startDate && endDate
-      ? getDaysDifference(startDate, endDate) * selectedRegions.length
+    startDate && endDate && selectedRegions.length > 0
+      ? getDaysDifference(startDate, endDate)
       : 0;
 
   const isConflict = isSuccess

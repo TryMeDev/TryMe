@@ -30,6 +30,13 @@ body {
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-position: 75% 0;
+  }
 }
 
 #root {
