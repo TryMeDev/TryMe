@@ -12,7 +12,7 @@ const BottomBar: React.FC<{
   const { t } = useTranslation();
 
   return (
-    <div className="w-full flex items-center border-t border-gray-200">
+    <div className="w-full flex items-center">
       <Button
         text
         className="py-0 px-1"

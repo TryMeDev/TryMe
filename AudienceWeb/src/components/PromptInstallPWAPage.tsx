@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PUBLISHER_URL } from "../config";
-import { Message } from "primereact/message";
-
-type Platform = "windows" | "mac" | "ios" | "android" | "unknown";
+import usePlatform, { Platform } from "../hooks/usePlatform";
 
 interface InstructionStep {
   en: string;
@@ -18,19 +16,7 @@ interface Instruction {
 }
 
 const PromptInstallPWAPage: React.FC = () => {
-  const [platform, setPlatform] = useState<Platform>("unknown");
-
-  useEffect(() => {
-    if (/Windows/.test(navigator.userAgent)) {
-      setPlatform("windows");
-    } else if (/Macintosh/.test(navigator.userAgent)) {
-      setPlatform("mac");
-    } else if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
-      setPlatform("ios");
-    } else if (/Android/.test(navigator.userAgent)) {
-      setPlatform("android");
-    }
-  }, []);
+  const platform = usePlatform();
 
   const instructions: Record<Platform, Instruction> = {
     windows: {
@@ -147,18 +133,13 @@ const PromptInstallPWAPage: React.FC = () => {
 
   const currentInstructions = instructions[platform];
   const colors = {
-    primary: "#8800ff",
     secondary: "#ffcc00",
-    background: "#f8f8f8",
     text: "#333333",
     lightText: "#666666",
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: colors.background }}
-    >
+    <div className="min-h-screen flex items-center justify-center p-4">
       {/* <div className="absolute top-4 right-4">
         <Message
           text={
@@ -178,7 +159,7 @@ const PromptInstallPWAPage: React.FC = () => {
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-2xl w-full">
         <h1
           className="text-4xl font-light text-center mb-8"
-          style={{ color: colors.primary }}
+          style={{ color: "var(--primary-color)" }}
         >
           <span className="block">{currentInstructions.title.en}</span>
           <span
@@ -193,7 +174,7 @@ const PromptInstallPWAPage: React.FC = () => {
             <div className="flex items-start">
               <span
                 className="flex items-center justify-center text-white rounded-full w-8 h-8 mr-4 flex-shrink-0 text-sm font-bold"
-                style={{ backgroundColor: colors.primary }}
+                style={{ backgroundColor: "var(--primary-color)" }}
               >
                 {0}
               </span>
@@ -221,15 +202,11 @@ const PromptInstallPWAPage: React.FC = () => {
           </li>
 
           {currentInstructions.steps.map((step, index) => (
-            <li
-              key={index}
-              className="fade-in"
-              style={{ animationDelay: `${(index + 1) * 150}ms` }}
-            >
+            <li key={index}>
               <div className="flex items-start">
                 <span
                   className="flex items-center justify-center text-white rounded-full w-8 h-8 mr-4 flex-shrink-0 text-sm font-bold"
-                  style={{ backgroundColor: colors.primary }}
+                  style={{ backgroundColor: "var(--primary-color)" }}
                 >
                   {index + 1}
                 </span>
@@ -241,6 +218,7 @@ const PromptInstallPWAPage: React.FC = () => {
                     {step.zh}
                   </p>
                 </div>
+                ``
               </div>
             </li>
           ))}

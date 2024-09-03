@@ -114,35 +114,45 @@ const Login = () => {
             <h1 className="text-4xl font-semibold text-center">
               {t("login.heading")}
             </h1>
-            <h2 className="text-2xl text-center">{t("login.subHeading")}</h2>
+            <h2 className="mt-1 text-xl text-center">
+              {t("login.subHeading")}
+            </h2>
           </div>
 
           <div className="h-full w-full !flex flex-col justify-center items-center p-4">
             <h2 className="text-4xl font-semibold text-center">
               {t("login.page2Heading")}
             </h2>
-            <h3 className="text-2xl text-center">{t("login.page2Content")}</h3>
+            <h3 className="mt-1 text-xl text-center">
+              {t("login.page2Content")}
+            </h3>
           </div>
 
           <div className="h-full w-full !flex flex-col justify-center items-center p-4">
             <h2 className="text-4xl font-semibold text-center">
               {t("login.page3Heading")}
             </h2>
-            <h3 className="text-2xl text-center">{t("login.page3Content")}</h3>
+            <h3 className="mt-1 text-xl text-center">
+              {t("login.page3Content")}
+            </h3>
           </div>
 
           <div className="h-full w-full !flex flex-col justify-center items-center p-4">
             <h2 className="text-4xl font-semibold text-center">
               {t("login.page4Heading")}
             </h2>
-            <h3 className="text-2xl text-center">{t("login.page4Content")}</h3>
+            <h3 className="mt-1 text-xl text-center">
+              {t("login.page4Content")}
+            </h3>
           </div>
 
           <div className="h-full w-full !flex flex-col justify-center items-center p-4">
             <h2 className="text-4xl font-semibold text-center">
               {t("login.page5Heading")}
             </h2>
-            <h3 className="text-2xl text-center">{t("login.page5Content")}</h3>
+            <h3 className="mt-1 text-xl text-center">
+              {t("login.page5Content")}
+            </h3>
           </div>
         </Slider>
       </div>

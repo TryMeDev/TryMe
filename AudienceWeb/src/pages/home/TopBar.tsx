@@ -4,11 +4,14 @@ import { Button } from "primereact/button";
 import { PUBLISHER_URL } from "../../config";
 import { IndexedDBContext } from "../../app/IndexedDBContext";
 import SearchByIdDialog from "./SearchByIdDialog";
+import usePlatform from "../../hooks/usePlatform";
 
 const TopBar: React.FC = () => {
   const navigate = useNavigate();
   const [isSearchByIdDialogOpen, setIsSearchByIdDialogOpen] =
     useState<boolean>(false);
+
+  const platform = usePlatform();
 
   const indexedDBContext = useContext(IndexedDBContext);
 
@@ -22,13 +25,15 @@ const TopBar: React.FC = () => {
     <div className="w-full flex justify-between items-center pr-2">
       <Button text label="TryMe" pt={{ label: { className: "text-2xl" } }} />
       <div>
-        <Button
-          icon="pi pi-apple"
-          text
-          onClick={(e) => {
-            setIsSearchByIdDialogOpen(true);
-          }}
-        />
+        {platform !== "android" && (
+          <Button
+            icon="pi pi-apple"
+            text
+            onClick={(e) => {
+              setIsSearchByIdDialogOpen(true);
+            }}
+          />
+        )}
 
         <a target="_blank" rel="noopener noreferrer" href={PUBLISHER_URL}>
           <Button icon="pi pi-pen-to-square" text onClick={(e) => {}} />
