@@ -218,7 +218,6 @@ const PromptInstallPWAPage: React.FC = () => {
                     {step.zh}
                   </p>
                 </div>
-                ``
               </div>
             </li>
           ))}

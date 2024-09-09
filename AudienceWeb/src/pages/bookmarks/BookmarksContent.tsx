@@ -57,7 +57,7 @@ const BookmarksContent: React.FC<{
           }}
           options={cats}
           optionLabel={`display.${lang}`}
-          className="w-full"
+          className="w-full mb-2"
         />
 
         {bookmarks?.map((bookmark, idx) => {
